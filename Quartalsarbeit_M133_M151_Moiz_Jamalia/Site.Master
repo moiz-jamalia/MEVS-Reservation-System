@@ -1,0 +1,31 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Quartalsarbeit_M133_M151_Moiz_Jamalia.Site" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <link href="styles.css" rel="stylesheet" />
+    <title ID="title" runat="server"/>
+</head>
+<body>
+    <form id="form" runat="server">
+        <div>
+            <header ID="Header" runat="server"/>
+            <navigation>
+                <span>
+                    <asp:ContentPlaceHolder ID="PlaceHolderHeader" runat="server">
+                         <asp:HyperLink NavigateUrl="navigateurl" Text="Reservation" runat="server" />
+                    </asp:ContentPlaceHolder>
+                </span>
+            </navigation>
+        </div>
+        <div>
+            <asp:ContentPlaceHolder ID="PlaceHolderMain" runat="server">
+            </asp:ContentPlaceHolder>
+            <footer>
+                <asp:Label ID="footer" runat="server" />
+            </footer>
+        </div>
+    </form>
+</body>
+</html>
