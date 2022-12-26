@@ -11,7 +11,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 {
 
 
-    public partial class Registration
+    public partial class Login
     {
 
         /// <summary>
@@ -130,5 +130,23 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator customVal1;
+
+        /// <summary>
+        /// tbMobileNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbMobileNumber;
+
+        /// <summary>
+        /// reqFieldVal6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqFieldVal6;
     }
 }

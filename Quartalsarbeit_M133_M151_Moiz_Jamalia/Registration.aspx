@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Registration" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Registration.aspx.cs" Inherits="Quartalsarbeit_M133_M151_Moiz_Jamalia.Registration" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Registration.aspx.cs" Inherits="Quartalsarbeit_M133_M151_Moiz_Jamalia.Login" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="PlaceHolderHeader" runat="server">
     <link media="screen" href="registration.css" rel="stylesheet" />
     <link media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">  
@@ -36,6 +36,7 @@
 
     <asp:Label Text="Mobile Number" runat="server" />
     
-    <asp:TextBox runat="server" />
+    <asp:TextBox ID="tbMobileNumber" runat="server" placeholder="enter Mobile Number..." />
+    <asp:RequiredFieldValidator ID="reqFieldVal6" ErrorMessage="!" ControlToValidate="tbMobileNumber" runat="server" CssClass="validator" Display="Dynamic" />
 
 </asp:Content>
