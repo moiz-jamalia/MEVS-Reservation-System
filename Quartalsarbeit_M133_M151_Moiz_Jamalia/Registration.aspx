@@ -39,4 +39,7 @@
     <asp:TextBox ID="tbMobileNumber" runat="server" placeholder="enter Mobile Number..." />
     <asp:RequiredFieldValidator ID="reqFieldVal6" ErrorMessage="!" ControlToValidate="tbMobileNumber" runat="server" CssClass="validator" Display="Dynamic" />
 
+    <asp:Button ID="btnSignUp" Text="Sign Up" type="submit" OnClick="BtnSignUp_Click" runat="server" CssClass="button is-link is-rounded" />
+    <asp:Button ID="btnLogIn" Text="Log In" type="submit" OnClick="BtnLogIn_Click" runat="server" CssClass="button is-text is-rounded" />
+
 </asp:Content>

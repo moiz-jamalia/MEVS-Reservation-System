@@ -19,5 +19,15 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         {
 
         }
+
+        protected void BtnSignUp_Click(object sender, EventArgs e) 
+        {
+        
+        }
+
+        protected void BtnLogIn_Click(object sender, EventArgs e) 
+        {
+        
+        }
     }
 }
