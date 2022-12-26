@@ -16,7 +16,7 @@
 
         <asp:Label Text="Password" runat="server" />
 
-        <asp:TextBox ID="tbPassword" runat="server" TextMode="Password" CssClass="input input-box" placeholder="enter Password" />
+        <asp:TextBox ID="tbPassword" runat="server" TextMode="Password" CssClass="input input-box" placeholder="enter Password..." />
         <asp:RequiredFieldValidator ID="reqFieldVal8" ErrorMessage="!" ControlToValidate="tbPassword" runat="server" CssClass="validator" Display="Dynamic" />
 
         <asp:Label ID="lbInvalidLogin" runat="server" CssClass="validator" />
