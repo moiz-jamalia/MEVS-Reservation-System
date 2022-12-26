@@ -22,7 +22,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             if (Page.IsValid)
             {
 
-            } 
+            }
             else
             {
                 lbInvalidLogin.Text = "The login data entered is incorrect.";

@@ -5,16 +5,16 @@
 <html>
 <head runat="server">
     <link href="styles.css" rel="stylesheet" />
-    <title ID="title" runat="server"/>
+    <title id="title" runat="server" />
 </head>
 <body>
     <form id="form" runat="server">
         <div>
-            <header ID="Header" runat="server"/>
+            <header id="Header" runat="server" />
             <navigation>
                 <span>
                     <asp:ContentPlaceHolder ID="PlaceHolderHeader" runat="server">
-                         <asp:HyperLink NavigateUrl="navigateurl" Text="Reservation" runat="server" />
+                        <asp:HyperLink NavigateUrl="navigateurl" Text="Reservation" runat="server" />
                     </asp:ContentPlaceHolder>
                 </span>
             </navigation>

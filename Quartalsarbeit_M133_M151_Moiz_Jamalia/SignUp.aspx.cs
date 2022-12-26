@@ -14,7 +14,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+
         }
 
         private bool isEmailValid(String email)
@@ -24,8 +24,8 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                 var addr = new System.Net.Mail.MailAddress(email);
                 return addr.Address == email;
             }
-            catch 
-            { 
+            catch
+            {
                 return false;
             }
         }
@@ -36,7 +36,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             args.IsValid = args != null && isEmailValid(mail) && !String.IsNullOrEmpty(mail) && (mail != "");
         }
 
-        protected void BtnSignUp_Click(object sender, EventArgs e) 
+        protected void BtnSignUp_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
             {
@@ -44,7 +44,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             }
         }
 
-        protected void BtnLogIn_Click(object sender, EventArgs e) 
+        protected void BtnLogIn_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Login.aspx");
         }
