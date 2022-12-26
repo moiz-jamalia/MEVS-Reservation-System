@@ -11,7 +11,27 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.Cookies["secureCookie"] != null)
+            {
+                Response.Cookies["SecureCookie"].Expires = DateTime.Now.AddDays(-1);
+            }
+        }
 
+        protected void BtnLogIn_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+
+            } 
+            else
+            {
+                lbInvalidLogin.Text = "The login data entered is incorrect.";
+            }
+        }
+
+        protected void BtnSignUp_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/SignUp.aspx");
         }
     }
 }

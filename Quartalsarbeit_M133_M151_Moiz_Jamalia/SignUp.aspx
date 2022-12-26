@@ -1,6 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Registration.aspx.cs" Inherits="Quartalsarbeit_M133_M151_Moiz_Jamalia.Login" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SignUp.aspx.cs" Inherits="Quartalsarbeit_M133_M151_Moiz_Jamalia.SignUp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="PlaceHolderHeader" runat="server">
     <link media="screen" href="registration.css" rel="stylesheet" />
+    <link media="screen" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" rel="stylesheet">
     <link media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">  
     <link media="screen" href ="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
 </asp:Content>
@@ -39,7 +40,9 @@
     <asp:TextBox ID="tbMobileNumber" runat="server" placeholder="enter Mobile Number..." />
     <asp:RequiredFieldValidator ID="reqFieldVal6" ErrorMessage="!" ControlToValidate="tbMobileNumber" runat="server" CssClass="validator" Display="Dynamic" />
 
-    <asp:Button ID="btnSignUp" Text="Sign Up" type="submit" OnClick="BtnSignUp_Click" runat="server" CssClass="button is-link is-rounded" />
-    <asp:Button ID="btnLogIn" Text="Log In" type="submit" OnClick="BtnLogIn_Click" runat="server" CssClass="button is-text is-rounded" />
+    <div CssClass="submit">
+        <asp:Button ID="btnSignUp" Text="Sign Up" type="submit" OnClick="BtnSignUp_Click" runat="server" CssClass="button is-link is-rounded" />
+        <asp:Button ID="btnLogIn" Text="Log In" type="submit" OnClick="BtnLogIn_Click" runat="server" CssClass="button is-text is-rounded" />
+    </div>
 
 </asp:Content>

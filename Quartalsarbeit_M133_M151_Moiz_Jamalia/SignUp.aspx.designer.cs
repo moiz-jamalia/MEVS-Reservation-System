@@ -11,7 +11,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 {
 
 
-    public partial class Login
+    public partial class SignUp
     {
 
         /// <summary>
