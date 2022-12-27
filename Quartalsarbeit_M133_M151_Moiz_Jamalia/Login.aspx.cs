@@ -31,7 +31,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                         case "2 - Registriert":
                             lbInvalidLogin.Text = "";
                             Session["email"] = tbEmail.Text;
-                            Session["isAdmin"] = 0;
+                            Session["isAdmin"] = IsMemberAdmin(tbEmail.Text);
 
                             Response.Cookies.Add(new HttpCookie("secureCookie", GetHashString(tbEmail.Text))
                             { 
@@ -39,7 +39,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                                 Secure= true,
                             });
 
-                            Response.Redirect("~/Reservation.aspx");
+                            Response.Redirect("~/ReservationOverview.aspx");
                             break;
 
                         case "3 - Inaktiv":
@@ -70,7 +70,6 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             cmd.Parameters["@Password"].Value = GetHashString(tbPassword.Text);
 
             bool IsValid = (int)cmd.ExecuteScalar() >= 1;
-            lbInvalidLogin.Text = GetHashString(tbPassword.Text);
             con.Close();
             return IsValid;
         }
@@ -98,6 +97,23 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             else status = "error";
 
             return status;
+        }
+
+        private bool IsMemberAdmin(string email)
+        {
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand("sp_SelectIsMemberAdmin", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            cmd.Parameters.Add(new SqlParameter("@eMail", SqlDbType.VarChar, 50));
+            cmd.Parameters["@eMail"].Value = email;
+
+            bool IsAdmin = (int)cmd.ExecuteScalar() >= 1;
+            con.Close();
+            return IsAdmin;
         }
 
         protected void BtnSignUp_Click(object sender, EventArgs e)

@@ -11,11 +11,13 @@ CREATE PROC sp_ValidateLogin
 		@Password VARCHAR(100)
 )
 AS
-SELECT COUNT(ID) FROM tbl_Mitglied WHERE eMail = @eMail AND Passwort = @Password;
+SELECT COUNT(ID) FROM tbl_Mitglied
+WHERE eMail = @eMail
+AND Passwort = @Password;
 GO
 
 /* ***************************************************************************** */
-/* Get Member status as text*/
+/* Get Member status as text */
 
 DROP PROC IF EXISTS sp_SelectMemberStatus;
 GO
@@ -27,4 +29,18 @@ AS
 SELECT Status from tbl_Status 
 JOIN tbl_Mitglied ON tbl_Status.ID = FK_Status
 WHERE tbl_Mitglied.eMail = @eMail;
+GO
+
+/* ***************************************************************************** */
+/* SELECT if Member is Admin  */
+
+DROP PROC IF EXISTS sp_SelectIsMemberAdmin;
+GO
+CREATE PROC sp_SelectIsMemberAdmin
+(
+		@eMail VARCHAR(50)
+)
+AS
+SELECT IsAdmin FROM tbl_Mitglied
+WHERE eMail = @eMail;
 GO

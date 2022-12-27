@@ -13,15 +13,12 @@
             <header id="Header" runat="server" />
             <navigation>
                 <span>
-                    <asp:ContentPlaceHolder ID="PlaceHolderHeader" runat="server">
-                        <asp:HyperLink NavigateUrl="navigateurl" Text="Reservation" runat="server" />
-                    </asp:ContentPlaceHolder>
+                    <asp:ContentPlaceHolder ID="PlaceHolderHeader" runat="server" />
                 </span>
             </navigation>
         </div>
         <div>
-            <asp:ContentPlaceHolder ID="PlaceHolderMain" runat="server">
-            </asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder ID="PlaceHolderMain" runat="server" />
             <footer>
                 <asp:Label ID="footer" runat="server" />
             </footer>

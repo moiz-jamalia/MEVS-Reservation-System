@@ -51,3 +51,19 @@ footer {
     height: 10vh;
     caret-color: transparent;
 }
+
+.navbar_overview {
+    margin: 1vh;
+    font-size: 3vh;
+    color: black;
+}
+
+.active {
+    color: midnightblue !important;
+}
+
+.navbar_text {
+    margin: 1vh;
+    font-size: 3vh;
+    color: black;
+}

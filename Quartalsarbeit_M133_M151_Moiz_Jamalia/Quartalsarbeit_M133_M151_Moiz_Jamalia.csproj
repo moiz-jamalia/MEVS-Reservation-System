@@ -79,9 +79,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Login.aspx" />
+    <Content Include="MembersOverview.aspx" />
     <Content Include="SignUp.aspx" />
-    <Content Include="Reservation.aspx" />
+    <Content Include="ReservationOverview.aspx" />
     <Content Include="styles.css" />
+    <Content Include="TrainComponentOverview.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +95,13 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MembersOverview.aspx.cs">
+      <DependentUpon>MembersOverview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MembersOverview.aspx.designer.cs">
+      <DependentUpon>MembersOverview.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SignUp.aspx.cs">
       <DependentUpon>SignUp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -100,12 +109,12 @@
     <Compile Include="SignUp.aspx.designer.cs">
       <DependentUpon>SignUp.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Reservation.aspx.cs">
-      <DependentUpon>Reservation.aspx</DependentUpon>
+    <Compile Include="ReservationOverview.aspx.cs">
+      <DependentUpon>ReservationOverview.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Reservation.aspx.designer.cs">
-      <DependentUpon>Reservation.aspx</DependentUpon>
+    <Compile Include="ReservationOverview.aspx.designer.cs">
+      <DependentUpon>ReservationOverview.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -115,6 +124,13 @@
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrainComponentOverview.aspx.cs">
+      <DependentUpon>TrainComponentOverview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainComponentOverview.aspx.designer.cs">
+      <DependentUpon>TrainComponentOverview.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
