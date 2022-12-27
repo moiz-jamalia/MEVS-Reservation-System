@@ -17,6 +17,25 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             }
         }
 
+        bool IsEmailValid(String email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        protected void Email_validation(object sender, ServerValidateEventArgs args)
+        {
+            String email = args.Value.ToString();
+            args.IsValid = args != null && IsEmailValid(email) && !String.IsNullOrEmpty(email) && (email != "");
+        }
+
         protected void BtnLogIn_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)

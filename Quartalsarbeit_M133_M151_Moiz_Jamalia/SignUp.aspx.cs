@@ -17,7 +17,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
         }
 
-        private bool isEmailValid(String email)
+        bool IsEmailValid(String email)
         {
             try
             {
@@ -33,12 +33,12 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         protected void Email_Validation(object source, ServerValidateEventArgs args)
         {
             String mail = args.Value.ToString();
-            args.IsValid = args != null && isEmailValid(mail) && !String.IsNullOrEmpty(mail) && (mail != "");
+            args.IsValid = args != null && IsEmailValid(mail) && !String.IsNullOrEmpty(mail) && (mail != "");
         }
 
         protected void BtnSignUp_Click(object sender, EventArgs e)
         {
-            if (Page.IsValid)
+            if(Page.IsValid)
             {
 
             }
@@ -54,7 +54,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             using (HashAlgorithm algorithm = SHA256.Create()) return algorithm.ComputeHash(Encoding.UTF8.GetBytes(pw));
         }
 
-        private string getHashString(string pw)
+        private string GetHashString(string pw)
         {
             StringBuilder sb = new StringBuilder();
             foreach (byte b in GetHash(pw)) sb.Append(b.ToString("X2"));
