@@ -2,4 +2,5 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="PlaceHolderHeader" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceHolderMain" runat="server">
+    <p>Helle</p>
 </asp:Content>

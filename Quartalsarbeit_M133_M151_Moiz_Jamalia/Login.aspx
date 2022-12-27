@@ -12,7 +12,7 @@
 
         <asp:TextBox ID="tbEmail" runat="server" CssClass="input input-box" placeholder="enter E-Mail..." />
         <asp:RequiredFieldValidator ID="reqFieldVal7" ErrorMessage="!" ControlToValidate="tbEmail" runat="server" CssClass="validator" Display="Dynamic" />
-        <asp:CustomValidator ID="customVal2" ErrorMessage="!" ControlToValidate="tbEmail" OnServerValidate="Email_validation" runat="server" CssClass="validator" Display="Dynamic" /> <br />
+        <asp:RegularExpressionValidator ID="regexVal1" ErrorMessage="!" ControlToValidate="tbEmail" runat="server" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="validator" Display="Dynamic" /> <br />
 
         <asp:Label Text="Password" runat="server" /><br />
 
@@ -22,8 +22,8 @@
         <asp:Label ID="lbInvalidLogin" runat="server" CssClass="validator" /><br />
 
         <div class="submit">
-            <asp:Button ID="btnLogIn" Text="Log In" UseSubmitBehavior="true" OnClick="BtnLogIn_Click" runat="server" CssClass="button is-link is-rounded" />
-            <asp:Button ID="btnSignUp" Text="Sign Up" UseSubmitBehavior="false" OnClick="BtnSignUp_Click" runat="server" CssClass="button is-text is-rounded" />
+            <asp:Button ID="btnLogIn" Text="Log In" type="submit" OnClick="BtnLogIn_Click" runat="server" CssClass="button is-link is-rounded" />
+            <asp:Button ID="btnSignUp" Text="Sign Up" type="submit" OnClick="BtnSignUp_Click" runat="server" CssClass="button is-text is-rounded" />
         </div>
     </div>
 

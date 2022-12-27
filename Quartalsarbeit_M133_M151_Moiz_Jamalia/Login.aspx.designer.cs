@@ -33,13 +33,13 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqFieldVal7;
 
         /// <summary>
-        /// customVal2 control.
+        /// regexVal1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator customVal2;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator regexVal1;
 
         /// <summary>
         /// tbPassword control.

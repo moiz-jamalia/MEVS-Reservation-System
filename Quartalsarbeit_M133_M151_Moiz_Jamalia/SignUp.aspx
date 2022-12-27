@@ -36,7 +36,7 @@
             <asp:TextBox ID="tbEmail" runat="server" CssClass="input input-box" placeholder="enter E-Mail..." />
             <asp:RequiredFieldValidator ID="reqFieldVal5" ErrorMessage="!" ControlToValidate="tbEmail" runat="server" CssClass="validator" Display="Dynamic" />
             <asp:CustomValidator ID="dublicateEmailVal" ErrorMessage="There is already an account with this E-Mail address." ControlToValidate="tbEmail" runat="server" CssClass="validator" Display="Dynamic" />
-            <asp:CustomValidator ID="customVal1" ErrorMessage="!" ControlToValidate="tbEmail" runat="server" OnServerValidate="Email_Validation" CssClass="validator" Display="Dynamic" /> <br />
+            <asp:RegularExpressionValidator ID="regexVal2" ErrorMessage="Please enter a valid email address" ControlToValidate="tbEmail" runat="server" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="validator" Display="Dynamic" /> <br />
 
             <asp:Label Text="Mobile Number" runat="server" /> <br />
 

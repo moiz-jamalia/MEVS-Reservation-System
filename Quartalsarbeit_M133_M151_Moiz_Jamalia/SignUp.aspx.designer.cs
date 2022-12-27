@@ -123,13 +123,13 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         protected global::System.Web.UI.WebControls.CustomValidator dublicateEmailVal;
 
         /// <summary>
-        /// customVal1 control.
+        /// regexVal2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator customVal1;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator regexVal2;
 
         /// <summary>
         /// tbMobileNumber control.
