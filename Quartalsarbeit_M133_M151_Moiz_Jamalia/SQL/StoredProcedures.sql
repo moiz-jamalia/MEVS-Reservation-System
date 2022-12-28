@@ -7,8 +7,8 @@ DROP PROC IF EXISTS sp_ValidateLogin;
 GO
 CREATE PROC sp_ValidateLogin
 (
-		@eMail NVARCHAR(255),
-		@Password NVARCHAR(255)
+	@eMail NVARCHAR(255),
+	@Password NVARCHAR(255)
 )
 AS
 SELECT COUNT(ID) FROM tbl_Mitglied
@@ -23,7 +23,7 @@ DROP PROC IF EXISTS sp_SelectMemberStatus;
 GO
 CREATE PROC sp_SelectMemberStatus
 (
-		@eMail NVARCHAR(255)
+	@eMail NVARCHAR(255)
 )
 AS
 SELECT Status from tbl_Status 
@@ -38,7 +38,7 @@ DROP PROC IF EXISTS sp_SelectIsMemberAdmin;
 GO
 CREATE PROC sp_SelectIsMemberAdmin
 (
-		@eMail NVARCHAR(255)
+	@eMail NVARCHAR(255)
 )
 AS
 SELECT COUNT(IsAdmin) FROM tbl_Mitglied
@@ -53,11 +53,11 @@ DROP PROC IF EXISTS sp_InsertMember;
 GO
 CREATE PROC sp_InsertMember
 (
-		@lastName NVARCHAR(255),
-		@firstName NVARCHAR(255),
-		@eMail NVARCHAR(255),
-		@Handy NVARCHAR(255),
-		@Password NVARCHAR(255)
+	@lastName NVARCHAR(255),
+	@firstName NVARCHAR(255),
+	@eMail NVARCHAR(255),
+	@Handy NVARCHAR(255),
+	@Password NVARCHAR(255)
 )
 AS
 IF NOT EXISTS (SELECT * FROM tbl_Mitglied WHERE eMail = @eMail)
@@ -80,7 +80,7 @@ DROP PROC IF EXISTS sp_SelectMember;
 GO
 CREATE PROC sp_SelectMember
 (
-		@eMail NVARCHAR(255)
+	@eMail NVARCHAR(255)
 )
 AS
 SELECT Name, Vorname, eMail, Handy, tbl_Mitglied.Bemerkung, FK_Status AS "Stat_ID", Status, IsAdmin FROM tbl_Mitglied
