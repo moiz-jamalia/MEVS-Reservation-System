@@ -23,7 +23,7 @@
 
         <div class="submit">
             <asp:Button ID="btnLogIn" Text="Log In" type="submit" OnClick="BtnLogIn_Click" runat="server" CssClass="button is-link is-rounded" />
-            <asp:Button ID="btnSignUp" Text="Sign Up" type="submit" OnClick="BtnSignUp_Click" runat="server" CssClass="button is-text is-rounded" />
+            <asp:Button ID="btnSignUp" Text="Sign Up" type="submit" OnClick="BtnSignUp_Click" CausesValidation="false" runat="server" CssClass="button is-text is-rounded" />
         </div>
     </div>
 

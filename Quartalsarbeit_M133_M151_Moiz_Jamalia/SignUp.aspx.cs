@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 {
     public partial class SignUp : System.Web.UI.Page
     {
+
+        private SqlConnection con = GlobalDBConnection.GetConnection();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -21,7 +21,41 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         {
             if(Page.IsValid)
             {
+                con.Open();
 
+                SqlCommand cmd = new SqlCommand("sp_InsertMember", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                cmd.Parameters.Add(new SqlParameter("@lastName", SqlDbType.NVarChar, 255));
+                cmd.Parameters.Add(new SqlParameter("@firstName", SqlDbType.NVarChar, 255));
+                cmd.Parameters.Add(new SqlParameter("@eMail", SqlDbType.NVarChar, 255));
+                cmd.Parameters.Add(new SqlParameter("@Handy", SqlDbType.NVarChar, 255));
+                cmd.Parameters.Add(new SqlParameter("@Password", SqlDbType.NVarChar, 255));
+
+                cmd.Parameters["@lastName"].Value = String.Concat((tbLastName.Text).Where(c => !Char.IsWhiteSpace(c)));
+                cmd.Parameters["@firstName"].Value = String.Concat((tbFirstName.Text).Where(c => !Char.IsWhiteSpace(c)));
+                cmd.Parameters["@eMail"].Value = String.Concat((tbEmail.Text).Where(c => !Char.IsWhiteSpace(c)));
+                cmd.Parameters["@Handy"].Value = tbMobileNumber.Text;
+                cmd.Parameters["@Password"].Value = GetHashString(tbPassword.Text);
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    lbMessage.Text = "Your Registration Request has been saved. Please wait until your request is accepted by an administrator. This may take some time. We thank you for your patience.";
+                    tbFirstName.Text = String.Empty;
+                    tbLastName.Text = String.Empty;
+                    tbEmail.Text = String.Empty;
+                    tbMobileNumber.Text = String.Empty;
+                    tbPassword.Text = String.Empty;
+                    tbConfirmPassword.Text = String.Empty;
+                }
+                catch
+                {
+                    duplicateEmailVal.IsValid = false;
+                }
+                con.Close();
             }
         }
 

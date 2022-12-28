@@ -60,6 +60,15 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         protected global::System.Web.UI.WebControls.TextBox tbPassword;
 
         /// <summary>
+        /// regFieldVal1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator regFieldVal1;
+
+        /// <summary>
         /// reqFieldVal3 control.
         /// </summary>
         /// <remarks>
@@ -114,22 +123,22 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqFieldVal5;
 
         /// <summary>
-        /// dublicateEmailVal control.
+        /// duplicateEmailVal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator dublicateEmailVal;
+        protected global::System.Web.UI.WebControls.CustomValidator duplicateEmailVal;
 
         /// <summary>
-        /// regexVal2 control.
+        /// regFieldVal2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator regexVal2;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator regFieldVal2;
 
         /// <summary>
         /// tbMobileNumber control.

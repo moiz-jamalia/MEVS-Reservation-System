@@ -22,6 +22,7 @@
         <asp:Label Text="Password" runat="server" /> <br />
 
         <asp:TextBox ID="tbPassword" TextMode="Password" runat="server" CssClass="input input-box" placeholder="enter password..." />
+        <asp:RegularExpressionValidator ID="regFieldVal1" ErrorMessage="Your password needs at least 8 characters." ControlToValidate="tbPassword" runat="server" ValidationExpression="^[\s\S]{8,}$" CssClass="validator" Display="Dynamic" />
         <asp:RequiredFieldValidator ID="reqFieldVal3" ErrorMessage="!" ControlToValidate="tbPassword" runat="server" CssClass="validator" Display="Dynamic" /> <br />
 
         <asp:Label Text="Confirm Password" runat="server" /> <br />
@@ -35,8 +36,8 @@
 
             <asp:TextBox ID="tbEmail" runat="server" CssClass="input input-box" placeholder="enter E-Mail..." />
             <asp:RequiredFieldValidator ID="reqFieldVal5" ErrorMessage="!" ControlToValidate="tbEmail" runat="server" CssClass="validator" Display="Dynamic" />
-            <asp:CustomValidator ID="dublicateEmailVal" ErrorMessage="There is already an account with this E-Mail address." ControlToValidate="tbEmail" runat="server" CssClass="validator" Display="Dynamic" />
-            <asp:RegularExpressionValidator ID="regexVal2" ErrorMessage="Please enter a valid email address" ControlToValidate="tbEmail" runat="server" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="validator" Display="Dynamic" /> <br />
+            <asp:CustomValidator ID="duplicateEmailVal" ErrorMessage="There is already an account with this E-Mail address." ControlToValidate="tbEmail" runat="server" CssClass="validator" Display="Dynamic" />
+            <asp:RegularExpressionValidator ID="regFieldVal2" ErrorMessage="Please enter a valid email address" ControlToValidate="tbEmail" runat="server" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="validator" Display="Dynamic" /> <br />
 
             <asp:Label Text="Mobile Number" runat="server" /> <br />
 
@@ -48,7 +49,7 @@
 
         <div class="submit">
             <asp:Button ID="btnSignUp" Text="Sign Up" UseSubmitBehavior="true" OnClick="BtnSignUp_Click" runat="server" CssClass="button is-link is-rounded" />
-            <asp:Button ID="btnLogIn" Text="Log In" UseSubmitBehavior="false" OnClick="BtnLogIn_Click" runat="server" CssClass="button is-text is-rounded" />
+            <asp:Button ID="btnLogIn" Text="Log In" UseSubmitBehavior="false" OnClick="BtnLogIn_Click" CausesValidation="false" runat="server" CssClass="button is-text is-rounded" />
         </div>
     </div>
 

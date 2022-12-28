@@ -12,5 +12,17 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceHolderMain" runat="server">
-    <p>Helle</p>
+    
+    <div>
+        
+        <asp:Label ID="lbReservations" Text="Reservations" runat="server" />
+
+        <asp:GridView ID="gvReservations" runat="server">
+
+        </asp:GridView>
+
+    </div>
+
+    <asp:Button Text="create Reservation" runat="server" CssClass="button is-link is-rounded"/>
+
 </asp:Content>
