@@ -118,7 +118,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
         protected void BtnSignUp_Click(object sender, EventArgs e)
         {
-            if(Page.IsPostBack) Response.Redirect("~/SignUp.aspx");
+            Response.Redirect("~/SignUp.aspx");
         }
 
         private byte[] GetHash(string input)
