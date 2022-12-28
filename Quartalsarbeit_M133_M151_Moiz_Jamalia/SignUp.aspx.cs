@@ -11,11 +11,8 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
     public partial class SignUp : System.Web.UI.Page
     {
 
-        private SqlConnection con = GlobalDBConnection.GetConnection();
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
+        private readonly SqlConnection con = GlobalDBConnection.GetConnection();
+        protected void Page_Load(object sender, EventArgs e) { }
 
         protected void BtnSignUp_Click(object sender, EventArgs e)
         {
@@ -40,9 +37,12 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                 cmd.Parameters["@Handy"].Value = tbMobileNumber.Text;
                 cmd.Parameters["@Password"].Value = GetHashString(tbPassword.Text);
 
-                try
+                
+                int insert = cmd.ExecuteNonQuery();
+
+                if (insert < 0) duplicateEmailVal.IsValid = false;
+                else 
                 {
-                    cmd.ExecuteNonQuery();
                     lbMessage.Text = "Your Registration Request has been saved. Please wait until your request is accepted by an administrator. This may take some time. We thank you for your patience.";
                     tbFirstName.Text = String.Empty;
                     tbLastName.Text = String.Empty;
@@ -51,10 +51,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                     tbPassword.Text = String.Empty;
                     tbConfirmPassword.Text = String.Empty;
                 }
-                catch
-                {
-                    duplicateEmailVal.IsValid = false;
-                }
+                
                 con.Close();
             }
         }

@@ -12,5 +12,24 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceHolderMain" runat="server">
-    <p>hehehd</p>
+    
+    <div class="GVStyle">
+
+        <asp:Label Text="Train Component Overview" runat="server" CssClass="labelStyle" />
+
+        <asp:GridView ID="gvTrainComponents" runat="server" AutoGenerateColumns="false" OnPageIndexChanging="GvTrainComponents_PageIndexChanging" 
+            OnRowCancelingEdit="GvTrainComponents_RowCancelingEdit" OnRowDeleting="GvTrainComponents_RowDeleting" OnRowEditing="GvTrainComponents_RowEditing"
+            OnRowUpdating="GvTrainComponents_RowUpdating">
+
+            <Columns>
+
+
+                <asp:CommandField ShowEditButton="true" />
+                <asp:CommandField ShowDeleteButton="true" />
+            </Columns>
+
+        </asp:GridView>
+    </div>
+
 </asp:Content>
+

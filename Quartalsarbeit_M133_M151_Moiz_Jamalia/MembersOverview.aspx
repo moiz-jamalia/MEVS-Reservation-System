@@ -14,23 +14,47 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceHolderMain" runat="server">
 
-    <div>
+    <div class="GVStyle">
 
-        <asp:Label Text="Registrations requests" runat="server" />
+        <asp:Label ID="lbSignUpRequests" Text="Sign Up requests" runat="server" CssClass="labelStyle"/>
 
-        <asp:GridView runat="server" AutoGenerateColumns="false" >
+        <asp:GridView ID="GvSignUps" runat="server" AutoGenerateColumns="false" OnPageIndexChanging="GvSignUps_PageIndexChanging" OnRowCommand="GvSignUps_RowCommand" >
+
             <Columns>
 
-             <asp:TemplateField>
+                <asp:BoundField DataField="Name" HeaderText="Last Name" />
+                <asp:BoundField DataField="Vorname" HeaderText="First Name" />
+                <asp:BoundField DataField="eMail" HeaderText="E-Mail" />
+                <asp:BoundField DataField="Handy" HeaderText="Handy" />
+                <asp:ButtonField ButtonType="Button" Text="Accept" CommandName="accept" />
+                <asp:ButtonField ButtonType="Button" Text="Decline" CommandName="decline" />
+
+            </Columns>
+
+        </asp:GridView>
+
+        <asp:Label Text="Member Overview" runat="server" CssClass="labelStyle"/>
+
+        <asp:GridView ID="GvMembers" runat="server" AutoGenerateColumns="false" OnPageIndexChanging="gvMembers_PageIndexChanging" OnRowCancelingEdit="GvMembers_RowCancelingEdit"
+            OnRowDeleting="GvMembers_RowDeleting" OnRowEditing="GvMembers_RowEditing" OnRowUpdating="GvMembers_RowUpdating" OnRowDataBound="GvMembers_RowDataBound">
+            <Columns>
+
+                <asp:CheckBoxField DataField="IsAdmin" HeaderText="Admin" />
+                <asp:BoundField DataField="Name" HeaderText="Last Name" />
+                <asp:BoundField DataField="Vorname" HeaderText="First Name" />
+                <asp:BoundField DataField="eMail" HeaderText="E-Mail" ReadOnly="true"/>
+                <asp:BoundField DataField="Handy" HeaderText="Handy" />
+                <asp:BoundField DataField="Bemerkung" HeaderText="Comment" />
+
+             <asp:TemplateField HeaderText="Status">
 
                  <EditItemTemplate>
                      <asp:DropDownList ID="ddl_Status" runat="server" />
                  </EditItemTemplate>
 
                  <ItemTemplate>
-                     <asp:label runat="server" Text='<%# Eval("Status") %>''/>
+                     <asp:label runat="server" Text='<%# Eval("Status") %>'/>
                  </ItemTemplate>
-
 
              </asp:TemplateField>
 
@@ -42,6 +66,6 @@
 
     </div>
 
-    <asp:Button ID="btnLogOut" Text="Log Out" runat="server" />
+    <asp:Button ID="btnLogOut" Text="Log Out" runat="server" OnClick="BtnLogOut_Click"/>
 
 </asp:Content>

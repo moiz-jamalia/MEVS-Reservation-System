@@ -48,7 +48,7 @@
         <asp:Label ID="lbMessage" runat="server" ForeColor="Green" /> <br />
 
         <div class="submit">
-            <asp:Button ID="btnSignUp" Text="Sign Up" UseSubmitBehavior="true" OnClick="BtnSignUp_Click" runat="server" CssClass="button is-link is-rounded" />
+            <asp:Button ID="btnSignUp" Text="Sign Up" UseSubmitBehavior="true" OnClick="BtnSignUp_Click" runat="server" CssClass="button is-link is-rounded button_background_color" />
             <asp:Button ID="btnLogIn" Text="Log In" UseSubmitBehavior="false" OnClick="BtnLogIn_Click" CausesValidation="false" runat="server" CssClass="button is-text is-rounded" />
         </div>
     </div>

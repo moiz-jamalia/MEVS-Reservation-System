@@ -15,6 +15,33 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
     {
 
         /// <summary>
+        /// lbSignUpRequests control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbSignUpRequests;
+
+        /// <summary>
+        /// GvSignUps control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GvSignUps;
+
+        /// <summary>
+        /// GvMembers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GvMembers;
+
+        /// <summary>
         /// btnLogOut control.
         /// </summary>
         /// <remarks>

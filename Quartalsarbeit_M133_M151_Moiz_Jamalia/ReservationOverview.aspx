@@ -13,16 +13,41 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceHolderMain" runat="server">
     
-    <div>
+    <div runat="server" CssClass="GVStyle">
         
-        <asp:Label ID="lbReservations" Text="Reservations" runat="server" />
+        <asp:Label ID="lbReservations" Text="Reservations" runat="server" CssClass="labelStyle"/>
 
-        <asp:GridView ID="gvReservations" runat="server">
+        <asp:GridView ID="gvReservations" runat="server" AutoGenerateColumns="false" OnPageIndexChanging="GvReservations_PageIndexChanging" OnRowCancelingEdit="GvReservations_RowCancelingEdit"
+            OnRowDeleting="GvReservations_RowDeleting" OnRowEditing="GvReservations_RowEditing" OnRowUpdating="GvReservations_RowUpdating" OnRowDataBound="GvReservations_RowDataBound">
+
+            <Columns>
+                <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="true" />
+                <asp:BoundField DataField="Name" HeaderText="Last Name" ReadOnly="true" />
+
+            </Columns>
+
+        </asp:GridView>
+
+        <asp:Label ID="lbAllReservations" Text="All Reservations" runat="server" CssClass="labelStyle"/>
+
+        <asp:GridView ID="gvAllReservations" runat="server" AutoGenerateColumns="false">
+
+            <Columns>
+
+                <asp:BoundField />
+                <asp:BoundField />
+                <asp:BoundField />
+                <asp:BoundField />
+                <asp:BoundField />
+                <asp:BoundField />
+                <asp:BoundField />
+
+            </Columns>
 
         </asp:GridView>
 
     </div>
 
-    <asp:Button Text="create Reservation" runat="server" CssClass="button is-link is-rounded"/>
+    <asp:Button ID="btnCreateReservation" Text="Create Reservation" OnClick="BtnCreateReservation_Click" runat="server" CssClass="button is-link is-rounded button_background_color"/>
 
 </asp:Content>

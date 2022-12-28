@@ -64,8 +64,8 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                 CommandType = CommandType.StoredProcedure
             };
 
-            cmd.Parameters.Add(new SqlParameter("@eMail", SqlDbType.VarChar, 255));
-            cmd.Parameters.Add(new SqlParameter("@Password", SqlDbType.VarChar, 255));
+            cmd.Parameters.Add(new SqlParameter("@eMail", SqlDbType.NVarChar, 255));
+            cmd.Parameters.Add(new SqlParameter("@Password", SqlDbType.NVarChar, 255));
             cmd.Parameters["@eMail"].Value = tbEmail.Text;
             cmd.Parameters["@Password"].Value = GetHashString(tbPassword.Text);
 
@@ -82,7 +82,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                 CommandType = CommandType.StoredProcedure
             };
 
-            cmd.Parameters.Add(new SqlParameter("@eMail", SqlDbType.VarChar, 255));
+            cmd.Parameters.Add(new SqlParameter("@eMail", SqlDbType.NVarChar, 255));
             cmd.Parameters["@eMail"].Value = email;
 
             SqlDataReader reader = cmd.ExecuteReader();
@@ -108,7 +108,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                 CommandType = CommandType.StoredProcedure
             };
 
-            cmd.Parameters.Add(new SqlParameter("@eMail", SqlDbType.VarChar, 255));
+            cmd.Parameters.Add(new SqlParameter("@eMail", SqlDbType.NVarChar, 255));
             cmd.Parameters["@eMail"].Value = email;
 
             bool IsAdmin = (int)cmd.ExecuteScalar() == 1;

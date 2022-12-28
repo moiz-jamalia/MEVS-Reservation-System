@@ -59,11 +59,28 @@ footer {
 }
 
 .active {
-    color: midnightblue !important;
+    color: orangered !important;
 }
 
 .navbar_text {
     margin: 1vh;
     font-size: 3vh;
     color: black;
+}
+
+.button_background_color {
+    background-color: orangered !important;
+}
+
+.labelStyle {
+    font-size: 3vh;
+    font-weight: bold;
+    margin-bottom: 2vh;
+}
+
+.GVStyle {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%);
 }
