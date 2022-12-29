@@ -23,7 +23,25 @@
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="true" />
                 <asp:BoundField DataField="Name" HeaderText="Last Name" ReadOnly="true" />
+                <asp:BoundField DataField="Vorname" HeaderText="First Name" ReadOnly="true" />
 
+                <asp:TemplateField>
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="ddl_Train" runat="server" />
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lbTrain" Text='<%# Eval("Zug") %>' runat="server" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField>
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="ddl_RollingStock" runat="server" />
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lbRollingStock" Text='<%# Eval("Rollmaterial") %>' runat="server" />
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
 
         </asp:GridView>
@@ -34,13 +52,16 @@
 
             <Columns>
 
-                <asp:BoundField />
-                <asp:BoundField />
-                <asp:BoundField />
-                <asp:BoundField />
-                <asp:BoundField />
-                <asp:BoundField />
-                <asp:BoundField />
+                <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="true" />
+                <asp:BoundField DataField="Name" HeaderText="Last Name" ReadOnly="true" />
+                <asp:BoundField DataField="Vorname" HeaderText="First Name" ReadOnly="true" />
+                <asp:BoundField DataField="Zugbezeichnung" HeaderText="Train designation" ReadOnly="true" />
+                <asp:BoundField DataField="Typenbezeichnung" HeaderText="Type designation" ReadOnly="true" />
+                <asp:BoundField DataField="Nr" HeaderText="No." ReadOnly="true" />
+                <asp:BoundField DataField="Bezeichnung" HeaderText="Designation" ReadOnly="true" />
+                <asp:BoundField DataField="Farbe" HeaderText="Color" ReadOnly="true" />
+                <asp:BoundField DataField="Von" HeaderText="From" ReadOnly="true" />
+                <asp:BoundField DataField="Bis" HeaderText="To" ReadOnly="true" />
 
             </Columns>
 

@@ -108,7 +108,13 @@ DROP PROC IF EXISTS sp_SelectAllReservations;
 GO
 CREATE PROC sp_SelectAllReservations
 AS
-SELECT 
+SELECT Z.ID, M.Name, M.Vorname, CAST(Z.Bezeichnung AS NVARCHAR(20)) AS 'Zug', CAST(R.Typenbezeichnung AS NVARCHAR(20)) + ' ' +  CAST(R.Nr AS NVARCHAR(20)) + ' ' + CAST(R.Beschreibung AS NVARCHAR(20)) + ' ' + CAST(R.Farbe AS NVARCHAR(20)) AS 'Rollmaterial', (FORMAT (Z.ReservationVon, 'dd.MM.yy HH:mm')) AS 'Von', (FORMAT (Z.ReservationBis, 'dd.MM.yy HH:mm')) AS 'Bis' 
+FROM tbl_Mitglied AS M
+JOIN tbl_Zug AS Z ON Z.FK_Mitglied = M.ID
+LEFT JOIN tbl_Zug_Rollmaterial AS ZR ON Z.ID = ZR.FK_Zug 
+LEFT JOIN tbl_Rollmaterial AS R ON ZR.FK_Rollmaterial = R.ID
+ORDER BY M.ID;
+GO
 
 /* ***************************************************************************** */
 /* Select Own Reservations */
@@ -117,7 +123,14 @@ DROP PROC IF EXISTS sp_SelectOwnReservations;
 GO
 CREATE PROC sp_SelectOwnReservations
 (
-		@eMail NVARCHAR(255)
+	@eMail NVARCHAR(255)
 )
 AS
-SELECT
+SELECT Z.ID, M.Name, M.Vorname,  CAST(Z.Bezeichnung AS NVARCHAR(20)) AS 'Zug', CAST(R.Typenbezeichnung AS NVARCHAR(20)) + ' ' +  CAST(R.Nr AS NVARCHAR(20)) + ' ' + CAST(R.Beschreibung AS NVARCHAR(20)) + ' ' + CAST(R.Farbe AS NVARCHAR(20)) AS 'Rollmaterial', (FORMAT (Z.ReservationVon, 'dd.MM.yy HH:mm')) AS 'Von', (FORMAT (Z.ReservationBis, 'dd.MM.yy HH:mm')) AS 'Bis' 
+FROM tbl_Mitglied AS M
+JOIN tbl_Zug AS Z ON Z.FK_Mitglied = M.ID
+LEFT JOIN tbl_Zug_Rollmaterial AS ZR ON Z.ID = ZR.FK_Zug 
+LEFT JOIN tbl_Rollmaterial AS R ON ZR.FK_Rollmaterial = R.ID
+WHERE M.eMail = @eMail
+ORDER BY M.ID;
+GO

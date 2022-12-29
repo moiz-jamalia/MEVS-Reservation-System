@@ -29,7 +29,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
             if (Session["isAdmin"].ToString() == "False")
             {
-                cmd = new SqlCommand("", con)
+                cmd = new SqlCommand("sp_SelectOwnReservations", con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -39,7 +39,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             }
             else
             {
-                cmd = new SqlCommand("", con)
+                cmd = new SqlCommand("sp_SelectAllReservations", con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -50,7 +50,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             dap.Fill(dt);
             con.Close();
 
-            CheckIfTableEmpty(dt);
+            CheckIfTableEmpty(gvReservations, dt);
 
             if (Session["isAdmin"].ToString() == "False") GvBindAllRes();
         }
@@ -61,7 +61,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
             con.Open();
 
-            SqlCommand cmd = new SqlCommand("", con)
+            SqlCommand cmd = new SqlCommand("sp_SelectAllReservations", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
@@ -70,26 +70,26 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             dap.Fill(dt);
             con.Close();
 
-            CheckIfTableEmpty(dt);
+            CheckIfTableEmpty(gvAllReservations, dt);
         }
 
-        private void CheckIfTableEmpty(DataTable dt)
+        private void CheckIfTableEmpty(GridView gv, DataTable dt)
         {
             if (dt.Rows.Count > 0)
             {
-                gvReservations.DataSource = dt;
-                gvReservations.DataBind();
+                gv.DataSource = dt;
+                gv.DataBind();
             }
             else
             {
                 dt.Rows.Add(dt.NewRow());
-                gvReservations.DataSource = dt;
-                gvReservations.DataBind();
-                int Column = gvReservations.Rows[0].Cells.Count;
-                gvReservations.Rows[0].Cells.Clear();
-                gvReservations.Rows[0].Cells.Add(new TableCell());
-                gvReservations.Rows[0].Cells[0].ColumnSpan = Column;
-                gvReservations.Rows[0].Cells[0].Text = "No reservations available.";
+                gv.DataSource = dt;
+                gv.DataBind();
+                int Column = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = Column;
+                gv.Rows[0].Cells[0].Text = "No reservations available.";
             }
         }
 
