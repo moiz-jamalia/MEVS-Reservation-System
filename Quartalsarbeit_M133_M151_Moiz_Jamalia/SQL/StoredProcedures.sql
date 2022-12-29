@@ -1,6 +1,30 @@
 ﻿USE MEVS;
 
 /* ***************************************************************************** */
+/* Database Values & Tables  */
+
+UPDATE tbl_Status SET Status = '2 - Registriert' WHERE ID = 2;
+
+UPDATE tbl_Mitglied SET eMail = 'marcel.weber@gbssg.ch' WHERE ID = 1; 
+
+UPDATE tbl_Mitglied SET eMail = 'peter.koch@gmail.com' WHERE ID = 2;
+
+UPDATE tbl_Mitglied SET Passwort = '29349D3905197DD4830220D388BA2EEEE8BE2F31D7908948EFA6F70A9DE39A6B' WHERE ID = 1;
+
+UPDATE tbl_Mitglied SET Passwort = '3499889F3F98A32DB69C03DC488B0794713233FF63E16095E6BD06F972726A2B' WHERE ID = 2;
+
+DROP TABLE tbl_Zug_Rollmaterial;
+
+CREATE TABLE [MEVS].[dbo].[tbl_Zug_Rollmaterial]
+(
+	ID INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
+	FK_Zug INT NOT NULL,
+	FK_Rollmaterial INT NOT NULL,
+	FOREIGN KEY (FK_Zug) REFERENCES [MEVS].[dbo].[tbl_Zug],
+	FOREIGN KEY (FK_Rollmaterial) REFERENCES [MEVS].[dbo].[tbl_Rollmaterial]
+);
+
+/* ***************************************************************************** */
 /* Validate Member Login */
 
 DROP PROC IF EXISTS sp_ValidateLogin;
@@ -32,7 +56,7 @@ WHERE tbl_Mitglied.eMail = @eMail;
 GO
 
 /* ***************************************************************************** */
-/* SELECT if Member is Admin  */
+/* Select if Member is Admin  */
 
 DROP PROC IF EXISTS sp_SelectIsMemberAdmin;
 GO
@@ -102,13 +126,102 @@ ORDER BY tbl_Mitglied.ID;
 GO
 
 /* ***************************************************************************** */
+/* Select all Statuses */
+
+DROP PROC IF EXISTS sp_SelectAllStatuses;
+GO
+CREATE PROC sp_SelectAllStatuses
+AS
+SELECT ID, Status FROM tbl_Status
+ORDER BY ID;
+GO
+
+/* ***************************************************************************** */
+/* Update Member Status */
+
+DROP PROC IF EXISTS sp_UpdateMemberStatus;
+GO
+CREATE PROC sp_UpdateMemberStatus
+(
+	@eMail NVARCHAR(255),
+	@newStatusID INT
+)
+AS
+UPDATE tbl_Mitglied 
+SET FK_Status = @newStatusID
+WHERE eMail = @eMail;
+GO
+
+/* ***************************************************************************** */
+/* Delete Member Status */
+
+DROP PROC IF EXISTS sp_DeleteMember;
+GO
+CREATE PROC sp_DeleteMember
+(
+	@eMail NVARCHAR(255)
+)
+AS
+DECLARE @DeletedMemberID AS INT;
+SELECT @DeletedMemberID = ID FROM tbl_Mitglied WHERE eMail = @eMail;
+
+DELETE tbl_Zug_Rollmaterial
+FROM tbl_Zug_Rollmaterial AS ZR 
+JOIN tbl_zug AS Z 
+ON ZR.FK_Zug = Z.ID
+WHERE Z.FK_Mitglied = @DeletedMemberID;
+
+UPDATE tbl_Rollmaterial SET Fk_Mitglied = NULL WHERE Fk_Mitglied = @DeletedMemberID;
+
+DELETE FROM tbl_Zug WHERE FK_Mitglied = @DeletedMemberID;
+
+DELETE FROM tbl_Mitglied WHERE eMail = @eMail;
+GO
+
+/* ***************************************************************************** */
+/* Update a single Member */
+
+DROP PROC IF EXISTS sp_UpdateMember;
+GO
+CREATE PROC sp_UpdateMember
+(
+	@Status INT,
+	@LastName NVARCHAR(255),
+	@FirstName NVARCHAR(255),
+	@CurrentEmail NVARCHAR(255),
+	@Handy NVARCHAR(255),
+	@IsAdmin BIT,
+	@Comment NVARCHAR(255)
+)
+AS
+UPDATE tbl_Mitglied SET Name = @LastName, Vorname = @FirstName, Handy = @Handy, IsAdmin = @IsAdmin, Bemerkung = @Comment
+WHERE eMail = @CurrentEmail;
+
+IF(@Status != 0)
+UPDATE tbl_Mitglied SET FK_Status = @Status
+WHERE eMail = @CurrentEmail;
+GO
+
+/* ***************************************************************************** */
+/* Select all registrations */
+
+DROP PROC IF EXISTS sp_SelectRegistrations;
+GO
+CREATE PROC sp_SelectRegistrations
+AS
+SELECT Name, Vorname, eMail, Handy FROM tbl_Mitglied
+WHERE FK_Status = 1
+ORDER BY ID;
+GO
+
+/* ***************************************************************************** */
 /* Select all Reservations */
 
 DROP PROC IF EXISTS sp_SelectAllReservations;
 GO
 CREATE PROC sp_SelectAllReservations
 AS
-SELECT Z.ID, M.Name, M.Vorname, CAST(Z.Bezeichnung AS NVARCHAR(20)) AS 'Zug', CAST(R.Typenbezeichnung AS NVARCHAR(20)) + ' ' +  CAST(R.Nr AS NVARCHAR(20)) + ' ' + CAST(R.Beschreibung AS NVARCHAR(20)) + ' ' + CAST(R.Farbe AS NVARCHAR(20)) AS 'Rollmaterial', (FORMAT (Z.ReservationVon, 'dd.MM.yy HH:mm')) AS 'Von', (FORMAT (Z.ReservationBis, 'dd.MM.yy HH:mm')) AS 'Bis' 
+SELECT Z.ID, M.Name, M.Vorname, Z.Bezeichnung, R.Typenbezeichnung, R.Nr, R.Beschreibung, R.Farbe, (FORMAT (Z.ReservationVon, 'dd.MM.yy HH:mm')) AS 'Von', (FORMAT (Z.ReservationBis, 'dd.MM.yy HH:mm')) AS 'Bis' 
 FROM tbl_Mitglied AS M
 JOIN tbl_Zug AS Z ON Z.FK_Mitglied = M.ID
 LEFT JOIN tbl_Zug_Rollmaterial AS ZR ON Z.ID = ZR.FK_Zug 
@@ -126,7 +239,7 @@ CREATE PROC sp_SelectOwnReservations
 	@eMail NVARCHAR(255)
 )
 AS
-SELECT Z.ID, M.Name, M.Vorname,  CAST(Z.Bezeichnung AS NVARCHAR(20)) AS 'Zug', CAST(R.Typenbezeichnung AS NVARCHAR(20)) + ' ' +  CAST(R.Nr AS NVARCHAR(20)) + ' ' + CAST(R.Beschreibung AS NVARCHAR(20)) + ' ' + CAST(R.Farbe AS NVARCHAR(20)) AS 'Rollmaterial', (FORMAT (Z.ReservationVon, 'dd.MM.yy HH:mm')) AS 'Von', (FORMAT (Z.ReservationBis, 'dd.MM.yy HH:mm')) AS 'Bis' 
+SELECT Z.ID, M.Name, M.Vorname, Z.Bezeichnung, R.Typenbezeichnung, R.Nr, R.Beschreibung, R.Farbe, (FORMAT (Z.ReservationVon, 'dd.MM.yy HH:mm')) AS 'Von', (FORMAT (Z.ReservationBis, 'dd.MM.yy HH:mm')) AS 'Bis' 
 FROM tbl_Mitglied AS M
 JOIN tbl_Zug AS Z ON Z.FK_Mitglied = M.ID
 LEFT JOIN tbl_Zug_Rollmaterial AS ZR ON Z.ID = ZR.FK_Zug 

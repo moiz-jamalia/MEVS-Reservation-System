@@ -36,6 +36,8 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             {
                 CommandType = CommandType.StoredProcedure
             };
+
+            con.Close();
         }
 
         protected void GvTrainComponents_RowDeleting(object sender, GridViewDeleteEventArgs e)

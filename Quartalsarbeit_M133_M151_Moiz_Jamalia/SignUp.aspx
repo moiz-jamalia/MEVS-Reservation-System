@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SignUp.aspx.cs" Inherits="Quartalsarbeit_M133_M151_Moiz_Jamalia.SignUp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PlaceHolderHeader" runat="server">
-    <link media="screen" href="registration.css" rel="stylesheet" />
+    <link media="screen" href="styles.css" rel="stylesheet" />
     <link media="screen" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" rel="stylesheet">
     <link media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />

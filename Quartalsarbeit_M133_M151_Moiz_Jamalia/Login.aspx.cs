@@ -36,7 +36,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                             Response.Cookies.Add(new HttpCookie("secureCookie", GetHashString(tbEmail.Text))
                             { 
                                 HttpOnly = true,
-                                Secure= true,
+                                Secure = true,
                             });
 
                             Response.Redirect("~/ReservationOverview.aspx");

@@ -6,6 +6,7 @@
 
     <div class="navbar_overview">
         <asp:HyperLink Text="Train Components" NavigateUrl="~/TrainComponentOverview.aspx" runat="server" CssClass="navbar_text"/>
+        <asp:HyperLink Text="Blocking Time" NavigateUrl="~/BlockingTimesOverview.aspx" runat="server" CssClass="navbar_text"/>
         <asp:HyperLink Text="Reservations" NavigateUrl="~/ReservationOverview.aspx" runat="server" CssClass="navbar_text"/>
         <asp:HyperLink Text="Member Administration" NavigateUrl="~/MembersOverview.aspx" runat="server" CssClass="active navbar_text"/>
     </div>
@@ -35,7 +36,7 @@
 
         <asp:Label Text="Member Overview" runat="server" CssClass="labelStyle"/>
 
-        <asp:GridView ID="GvMembers" runat="server" AutoGenerateColumns="false" OnPageIndexChanging="gvMembers_PageIndexChanging" OnRowCancelingEdit="GvMembers_RowCancelingEdit"
+        <asp:GridView ID="GvMembers" runat="server" AutoGenerateColumns="false" OnPageIndexChanging="GvMembers_PageIndexChanging" OnRowCancelingEdit="GvMembers_RowCancelingEdit"
             OnRowDeleting="GvMembers_RowDeleting" OnRowEditing="GvMembers_RowEditing" OnRowUpdating="GvMembers_RowUpdating" OnRowDataBound="GvMembers_RowDataBound">
             <Columns>
 

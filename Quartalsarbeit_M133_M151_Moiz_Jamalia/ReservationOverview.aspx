@@ -6,6 +6,7 @@
 
     <div class="navbar_overview">
         <asp:HyperLink Text="Train Components" NavigateUrl="~/TrainComponentOverview.aspx" runat="server" CssClass="navbar_text"/>
+        <asp:HyperLink Text="Blocking Time" NavigateUrl="~/BlockingTimesOverview.aspx" runat="server" CssClass="navbar_text"/>
         <asp:HyperLink Text="Reservations" NavigateUrl="~/ReservationOverview.aspx" runat="server" CssClass="active navbar_text"/>
         <asp:HyperLink Text="Member Administration" NavigateUrl="~/MembersOverview.aspx" runat="server" CssClass="navbar_text"/>
     </div>
@@ -13,7 +14,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceHolderMain" runat="server">
     
-    <div runat="server" CssClass="GVStyle">
+    <div runat="server" class="GVStyle">
         
         <asp:Label ID="lbReservations" Text="Reservations" runat="server" CssClass="labelStyle"/>
 
@@ -25,23 +26,17 @@
                 <asp:BoundField DataField="Name" HeaderText="Last Name" ReadOnly="true" />
                 <asp:BoundField DataField="Vorname" HeaderText="First Name" ReadOnly="true" />
 
-                <asp:TemplateField>
+                <asp:TemplateField HeaderText="Zugbezeichnung">
                     <EditItemTemplate>
                         <asp:DropDownList ID="ddl_Train" runat="server" />
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="lbTrain" Text='<%# Eval("Zug") %>' runat="server" />
+                        <asp:Label ID="lbTrain" Text='<%# Eval("Bezeichnung") %>' runat="server" />
                     </ItemTemplate>
                 </asp:TemplateField>
-
-                <asp:TemplateField>
-                    <EditItemTemplate>
-                        <asp:DropDownList ID="ddl_RollingStock" runat="server" />
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="lbRollingStock" Text='<%# Eval("Rollmaterial") %>' runat="server" />
-                    </ItemTemplate>
-                </asp:TemplateField>
+              
+                <asp:BoundField DataField="Von" HeaderText="From" ReadOnly="true" />
+                <asp:BoundField DataField="Bis" HeaderText="To" ReadOnly="true" />
             </Columns>
 
         </asp:GridView>
@@ -55,10 +50,10 @@
                 <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="true" />
                 <asp:BoundField DataField="Name" HeaderText="Last Name" ReadOnly="true" />
                 <asp:BoundField DataField="Vorname" HeaderText="First Name" ReadOnly="true" />
-                <asp:BoundField DataField="Zugbezeichnung" HeaderText="Train designation" ReadOnly="true" />
+                <asp:BoundField DataField="Bezeichnung" HeaderText="Train designation" ReadOnly="true" />
                 <asp:BoundField DataField="Typenbezeichnung" HeaderText="Type designation" ReadOnly="true" />
                 <asp:BoundField DataField="Nr" HeaderText="No." ReadOnly="true" />
-                <asp:BoundField DataField="Bezeichnung" HeaderText="Designation" ReadOnly="true" />
+                <asp:BoundField DataField="Beschreibung" HeaderText="Description" ReadOnly="true" />
                 <asp:BoundField DataField="Farbe" HeaderText="Color" ReadOnly="true" />
                 <asp:BoundField DataField="Von" HeaderText="From" ReadOnly="true" />
                 <asp:BoundField DataField="Bis" HeaderText="To" ReadOnly="true" />
