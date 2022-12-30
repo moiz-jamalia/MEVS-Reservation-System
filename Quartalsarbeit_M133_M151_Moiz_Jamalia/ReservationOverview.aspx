@@ -26,17 +26,29 @@
                 <asp:BoundField DataField="Name" HeaderText="Last Name" ReadOnly="true" />
                 <asp:BoundField DataField="Vorname" HeaderText="First Name" ReadOnly="true" />
 
-                <asp:TemplateField HeaderText="Zugbezeichnung">
+                <asp:TemplateField HeaderText="Train designation">
                     <EditItemTemplate>
                         <asp:DropDownList ID="ddl_Train" runat="server" />
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="lbTrain" Text='<%# Eval("Bezeichnung") %>' runat="server" />
+                        <asp:Label ID="lbTrain" Text='<%# Eval("Zugbezeichnung") %>' runat="server" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Train Components">
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="ddl_TrainComponent" runat="server" />
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lbTrainComponent" Text='<%# Eval("Rollmaterial") %>' runat="server" />
                     </ItemTemplate>
                 </asp:TemplateField>
               
                 <asp:BoundField DataField="Von" HeaderText="From" ReadOnly="true" />
                 <asp:BoundField DataField="Bis" HeaderText="To" ReadOnly="true" />
+
+                <asp:CommandField ShowEditButton="true" />
+                <asp:CommandField ShowDeleteButton="true" />
             </Columns>
 
         </asp:GridView>
@@ -50,11 +62,8 @@
                 <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="true" />
                 <asp:BoundField DataField="Name" HeaderText="Last Name" ReadOnly="true" />
                 <asp:BoundField DataField="Vorname" HeaderText="First Name" ReadOnly="true" />
-                <asp:BoundField DataField="Bezeichnung" HeaderText="Train designation" ReadOnly="true" />
-                <asp:BoundField DataField="Typenbezeichnung" HeaderText="Type designation" ReadOnly="true" />
-                <asp:BoundField DataField="Nr" HeaderText="No." ReadOnly="true" />
-                <asp:BoundField DataField="Beschreibung" HeaderText="Description" ReadOnly="true" />
-                <asp:BoundField DataField="Farbe" HeaderText="Color" ReadOnly="true" />
+                <asp:BoundField DataField="Zugbezeichnung" HeaderText="Train designation" ReadOnly="true" />
+                <asp:BoundField DataField="Rollmaterial" HeaderText="Train Components" ReadOnly="true" />
                 <asp:BoundField DataField="Von" HeaderText="From" ReadOnly="true" />
                 <asp:BoundField DataField="Bis" HeaderText="To" ReadOnly="true" />
 

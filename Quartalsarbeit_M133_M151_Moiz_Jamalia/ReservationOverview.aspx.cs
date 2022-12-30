@@ -16,6 +16,14 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         {
             if (Request.Cookies["secureCookie"] == null) Response.Redirect("~/Login.aspx");
 
+            if (Session["isAdmin"].ToString() == "True")
+            {
+                gvAllReservations.Visible = false;
+                lbAllReservations.Visible = false;
+                lbReservations.Text = "All Reservations";
+            }
+            else lbReservations.Text = "Reservations";
+            
             if (!IsPostBack) GvAllReservations();
         }
 
@@ -126,7 +134,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
         }
 
-        private DataTable GetTable()
+        private DataTable GetReservationTable()
         {
             DataTable dt = new DataTable();
 
