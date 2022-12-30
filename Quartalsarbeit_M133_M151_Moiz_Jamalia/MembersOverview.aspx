@@ -19,7 +19,7 @@
 
         <asp:Label ID="lbSignUpRequests" Text="Sign Up requests" runat="server" CssClass="labelStyle"/>
 
-        <asp:GridView ID="GvSignUps" runat="server" AutoGenerateColumns="false" OnPageIndexChanging="GvSignUps_PageIndexChanging" OnRowCommand="GvSignUps_RowCommand" >
+        <asp:GridView ID="GvSignUps" runat="server" CssClass="table--centered table table is-striped" HeaderStyle-CssClass="thead" RowStyle-CssClass="tr" AutoGenerateColumns="false" OnPageIndexChanging="GvSignUps_PageIndexChanging" OnRowCommand="GvSignUps_RowCommand" >
 
             <Columns>
 
@@ -36,7 +36,7 @@
 
         <asp:Label Text="Member Overview" runat="server" CssClass="labelStyle"/>
 
-        <asp:GridView ID="GvMembers" runat="server" AutoGenerateColumns="false" OnPageIndexChanging="GvMembers_PageIndexChanging" OnRowCancelingEdit="GvMembers_RowCancelingEdit"
+        <asp:GridView ID="GvMembers" runat="server" CssClass="table--centered table table is-striped" HeaderStyle-CssClass="thead" RowStyle-CssClass="tr" AutoGenerateColumns="false" OnPageIndexChanging="GvMembers_PageIndexChanging" OnRowCancelingEdit="GvMembers_RowCancelingEdit"
             OnRowDeleting="GvMembers_RowDeleting" OnRowEditing="GvMembers_RowEditing" OnRowUpdating="GvMembers_RowUpdating" OnRowDataBound="GvMembers_RowDataBound">
             <Columns>
 
@@ -67,6 +67,6 @@
 
     </div>
 
-    <asp:Button ID="btnLogOut" Text="Log Out" runat="server" OnClick="BtnLogOut_Click"/>
+    <asp:Button ID="btnLogOut" Text="Log Out" runat="server" Style="font-weight: bold; bottom: 0; left: 0; position: fixed; margin: 2vh; font-size: 2.3vh" CssClass="button is-dark" OnClick="BtnLogOut_Click"/>
 
 </asp:Content>

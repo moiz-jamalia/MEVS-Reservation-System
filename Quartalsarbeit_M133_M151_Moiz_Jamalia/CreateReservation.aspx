@@ -16,23 +16,35 @@
 
     <asp:Label Text="Reserve Train Component" runat="server" style="font-size: 3.7vh; font-weight: bold; position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%);" />
 
-    <div>
+    <div style="position: absolute; top: 25vh; left: 50%; transform: translate(-50%); height: auto; width: 50vw;">
 
-        <asp:Label Text="Train:" runat="server" />
-        <asp:DropDownList ID="ddl_Train" runat="server" />
-        <br />
-
-        <asp:Label Text="Rolling Stock: " runat="server" />
+        <asp:Label Text="Rolling Stock:" runat="server" style="margin-right: 2vh; margin-top: 10vh; font-size: 2.5vh;" />
         <asp:DropDownList ID="ddl_RollingStock" runat="server" />
         <br />
 
-        <asp:TextBox runat="server" />
+        <asp:Label Text="From:" runat="server" style="font-size: 2vh;"/>
 
-        <asp:TextBox runat="server" />
+        <asp:TextBox ID="tbFromDate" runat="server" TextMode="Date" CssClass="tbDateStyle input" />
+        <asp:RequiredFieldValidator ID="reqFieldVal8" ErrorMessage="!" ControlToValidate="tbFromDate" runat="server" CssClass="validator" Display="Dynamic" />
+
+        <asp:TextBox ID="tbFromTime" runat="server" TextMode="Time" CssClass="tbTimeStyle input" />
+        <asp:RequiredFieldValidator ID="reqFieldVal9" ErrorMessage="!" ControlToValidate="tbFromTime" runat="server" CssClass="validator" Display="Dynamic" />
+
+        <asp:Label Text="To:" runat="server" style="font-size: 2vh;"/>
+
+        <asp:TextBox ID="tbToDate" runat="server" TextMode="Date" CssClass="tbDateStyle input" />
+        <asp:RequiredFieldValidator ID="reqFieldVal10" ErrorMessage="!" ControlToValidate="tbToDate" runat="server" CssClass="validator" Display="Dynamic" />
+
+        <asp:TextBox ID="tbToTime" runat="server" TextMode="Time" CssClass="tbTimeStyle input" />
+        <asp:RequiredFieldValidator ID="reqFieldVal11" ErrorMessage="!" ControlToValidate="tbToTime" runat="server" CssClass="validator" Display="Dynamic" />
+
+        <asp:TextBox ID="tbComment" runat="server" TextMode="MultiLine" placeholder="Comment..." CssClass="textarea has-fixed-size" style="width: 10vw; margin-top: 1vh;" />
+
+        <asp:Label ID="lbResError" runat="server" CssClass="validator"/>
 
         <div style="position: absolute; right: 0; margin-top: 2vh;">
-            <asp:Button ID="btnCancel" Text="Cancel" runat="server" CausesValidation="false" OnClick="BtnCreate_Click" CssClass="button is-danger is-rounded" />
-            <asp:Button ID="btnCreate" Text="Create" runat="server" OnClick="btnCreate_Click" CssClass="button is-success is-rounded" />
+            <asp:Button ID="btnCancel" Text="Cancel" runat="server" CausesValidation="false" OnClick="BtnCancel_Click" CssClass="button is-danger is-rounded" />
+            <asp:Button ID="btnCreate" Text="Create" runat="server" OnClick="BtnCreate_Click" CssClass="button is-success is-rounded" />
         </div>
 
     </div>

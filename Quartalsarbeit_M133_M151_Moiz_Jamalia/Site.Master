@@ -19,8 +19,8 @@
         </div>
         <div>
             <asp:ContentPlaceHolder ID="PlaceHolderMain" runat="server" />
-            <footer>
-                <asp:Label ID="footer" runat="server" />
+            <footer style="position: fixed !important">
+                <asp:Label Style="margin: 1vh !important; font-size: 1.5vh;" ID="footer" runat="server" />
             </footer>
         </div>
     </form>

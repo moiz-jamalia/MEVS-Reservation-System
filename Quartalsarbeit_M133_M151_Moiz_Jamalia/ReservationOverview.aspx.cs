@@ -134,7 +134,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
         }
 
-        private DataTable GetReservationTable()
+        private DataTable GetTrainComponentTable()
         {
             DataTable dt = new DataTable();
 

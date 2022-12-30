@@ -95,7 +95,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             CheckIfTableEmpty(GvSignUps, dt, "There are no new registrations.");
         }
 
-        private void CheckIfTableEmpty(GridView gv, DataTable dt, String msg)
+        private void CheckIfTableEmpty(GridView gv, DataTable dt, string msg)
         {
             if (dt.Rows.Count > 0)
             {
@@ -124,7 +124,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         protected void GvSignUps_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int index = Convert.ToInt32(e.CommandArgument);
-            GridViewRow Row = GvSignUps.Rows[index] as GridViewRow;
+            GridViewRow Row = GvSignUps.Rows[index];
 
             con.Open();
 
@@ -169,7 +169,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
         protected void GvMembers_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            GridViewRow Row = GvMembers.Rows[e.RowIndex] as GridViewRow;
+            GridViewRow Row = GvMembers.Rows[e.RowIndex];
             if (Row.Cells[3].Text != Session["email"].ToString() && !(IsAdmin(Row.Cells[3].Text)))
             {
                 con.Open();
@@ -197,7 +197,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         protected void GvMembers_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             con.Open();
-            GridViewRow Row = GvMembers.Rows[e.RowIndex] as GridViewRow;
+            GridViewRow Row = GvMembers.Rows[e.RowIndex];
 
             GvMembers.EditIndex = -1;
 

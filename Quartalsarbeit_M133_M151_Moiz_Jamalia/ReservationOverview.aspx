@@ -18,7 +18,8 @@
         
         <asp:Label ID="lbReservations" Text="Reservations" runat="server" CssClass="labelStyle"/>
 
-        <asp:GridView ID="gvReservations" runat="server" AutoGenerateColumns="false" OnPageIndexChanging="GvReservations_PageIndexChanging" OnRowCancelingEdit="GvReservations_RowCancelingEdit"
+        <asp:GridView ID="gvReservations" runat="server" AutoGenerateColumns="false" CssClass="table--centered table table is-striped" HeaderStyle-CssClass="thead" 
+            RowStyle-CssClass="tr" OnPageIndexChanging="GvReservations_PageIndexChanging" OnRowCancelingEdit="GvReservations_RowCancelingEdit"
             OnRowDeleting="GvReservations_RowDeleting" OnRowEditing="GvReservations_RowEditing" OnRowUpdating="GvReservations_RowUpdating" OnRowDataBound="GvReservations_RowDataBound">
 
             <Columns>
@@ -55,7 +56,7 @@
 
         <asp:Label ID="lbAllReservations" Text="All Reservations" runat="server" CssClass="labelStyle"/>
 
-        <asp:GridView ID="gvAllReservations" runat="server" AutoGenerateColumns="false">
+        <asp:GridView ID="gvAllReservations" runat="server" CssClass="table--centered table table is-striped" HeaderStyle-CssClass="thead" RowStyle-CssClass="tr" AutoGenerateColumns="false">
 
             <Columns>
 
@@ -73,6 +74,8 @@
 
     </div>
 
-    <asp:Button ID="btnCreateReservation" Text="Create Reservation" OnClick="BtnCreateReservation_Click" runat="server" CssClass="button is-link is-rounded button_background_color"/>
+    <asp:Button ID="btnCreateReservation" Text="Create Reservation" OnClick="BtnCreateReservation_Click" runat="server" 
+        style="font-weight: bold; bottom: 0; left: 0; position: fixed; margin: 2vh; font-size: 2.5vh;"
+        CssClass="button is-link is-rounded button_background_color"/>
 
 </asp:Content>

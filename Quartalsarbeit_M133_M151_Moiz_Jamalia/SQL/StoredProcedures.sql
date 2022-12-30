@@ -247,3 +247,15 @@ LEFT JOIN tbl_Rollmaterial AS R ON ZR.FK_Rollmaterial = R.ID
 WHERE M.eMail = @eMail
 ORDER BY M.ID;
 GO
+
+/* ***************************************************************************** */
+/* Select All Train Components */
+
+DROP PROC IF EXISTS sp_SelectTrainComponents;
+GO
+CREATE PROC sp_SelectTrainComponents
+AS
+SELECT R.ID AS "RollmaterialID", CAST(R.Typenbezeichnung AS NVARCHAR(255)) + ' ' + CAST(R.Nr AS NVARCHAR(255)) + ' ' + CAST(R.Beschreibung AS NVARCHAR(255)) + ' ' + CAST(R.Farbe AS NVARCHAR(255)) AS "Rollmaterial"
+FROM tbl_Rollmaterial as R
+ORDER BY R.ID;
+GO

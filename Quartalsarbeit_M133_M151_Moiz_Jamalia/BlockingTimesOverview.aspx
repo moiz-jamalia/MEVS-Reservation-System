@@ -13,4 +13,8 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceHolderMain" runat="server">
+
+    <asp:Label Text="Blocking Time Overview" runat="server" Style="font-size: 3.7vh; font-weight: bold; position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%);" />
+
+
 </asp:Content>

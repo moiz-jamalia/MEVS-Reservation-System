@@ -37,6 +37,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                 CommandType = CommandType.StoredProcedure
             };
 
+            cmd.ExecuteNonQuery();
             con.Close();
         }
 
