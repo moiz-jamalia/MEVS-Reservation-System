@@ -214,7 +214,8 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             cmd.Parameters.Add(new SqlParameter("@IsAdmin", SqlDbType.Bit));
             cmd.Parameters.Add(new SqlParameter("@Comment", SqlDbType.NVarChar, 255));
 
-            cmd.Parameters["@Status"].Value = (Row.FindControl("ddl_Status") as DropDownList).SelectedValue;
+            if (Session["isAdmin"].ToString() == "False" || (Row.Cells[3].Text == Session["email"].ToString())) cmd.Parameters["@Status"].Value = 2;
+            else cmd.Parameters["@Status"].Value = (Row.FindControl("ddl_Status") as DropDownList).SelectedValue;
             if (isAdmin && Row.Cells[3].Text == Session["email"].ToString()) cmd.Parameters["@IsAdmin"].Value = true;
             else cmd.Parameters["@IsAdmin"].Value = (Row.Cells[0].Controls[0] as CheckBox).Checked;
             cmd.Parameters["@LastName"].Value = (Row.Cells[1].Controls[0] as TextBox).Text;
@@ -259,6 +260,9 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                     ddl.DataTextField = "Status";
                     ddl.DataValueField = "ID";
                     ddl.DataBind();
+
+                    DataRowView drv = e.Row.DataItem as DataRowView;
+                    ddl.SelectedValue = drv["Stat_ID"].ToString();
                 }
             }
         }
