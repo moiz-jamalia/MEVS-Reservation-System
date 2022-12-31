@@ -15,6 +15,51 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
     {
 
         /// <summary>
+        /// tbCreateTrain control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbCreateTrain;
+
+        /// <summary>
+        /// reqFieldVal13 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqFieldVal13;
+
+        /// <summary>
+        /// ddl_Train control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_Train;
+
+        /// <summary>
+        /// reqFieldVal14 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqFieldVal14;
+
+        /// <summary>
+        /// changeTBAndDDL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button changeTBAndDDL;
+
+        /// <summary>
         /// ddl_RollingStock control.
         /// </summary>
         /// <remarks>
@@ -22,6 +67,15 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddl_RollingStock;
+
+        /// <summary>
+        /// reqField12 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqField12;
 
         /// <summary>
         /// tbFromDate control.

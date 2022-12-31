@@ -18,6 +18,29 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             if (!IsPostBack) DDLRollingStockBind();
         }
 
+        private void TrainBind()
+        {
+
+        }
+
+        private DataTable GetTrainTable()
+        {
+            DataTable dt = new DataTable();
+
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand("", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            SqlDataAdapter dap = new SqlDataAdapter(cmd);
+
+            dap.Fill(dt);
+            con.Close();
+            return dt;
+        }
+
         private void DDLRollingStockBind()
         {
             DropDownList ddl = ddl_RollingStock;
@@ -54,12 +77,37 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
         protected void BtnCreate_Click(object sender, EventArgs e)
         {
-            DateTime fromDate = Convert.ToDateTime(tbFromDate.Text + " " + tbFromTime.Text);
-            DateTime toDate = Convert.ToDateTime(tbToDate.Text + " " + tbToTime.Text);
+            lbResError.Text = "";
 
-            if (fromDate >= toDate) lbResError.Text = "Please enter a valid Reservation span";
-            else if (toDate < DateTime.Now) lbResError.Text = "The To Date shouldn't be in the past";
-            else lbResError.Text = "Reservation is valid";
+            if (Page.IsValid)
+            {
+                try
+                {
+                    DateTime fromDate = Convert.ToDateTime(tbFromDate.Text + " " + tbFromTime.Text);
+                    DateTime toDate = Convert.ToDateTime(tbToDate.Text + " " + tbToTime.Text);
+
+                    if (fromDate >= toDate) lbResError.Text = "Please enter a valid time span";
+                    else if (toDate < DateTime.Now) lbResError.Text = "The end date must not be in the past.";
+                    else
+                    {
+                        int trainComponentID = int.Parse(ddl_RollingStock.SelectedValue);
+                    }
+                }
+                catch
+                {
+                    lbResError.Text = "Please enter a valid time span";
+                }
+            }
+        }
+
+        private void InsertReservation(string eMail, DateTime fromDate, DateTime toDate, string Comment)
+        {
+
+        }
+
+        protected void ChangeTBAndDDL_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

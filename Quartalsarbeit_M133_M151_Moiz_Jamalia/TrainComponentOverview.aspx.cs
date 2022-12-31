@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -66,7 +66,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
         protected void GvTrainComponents_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            gvTrainComponents.EditIndex = e.NewEditIndex; 
+            gvTrainComponents.EditIndex = e.NewEditIndex;
             GvTrainComponents();
         }
     }
