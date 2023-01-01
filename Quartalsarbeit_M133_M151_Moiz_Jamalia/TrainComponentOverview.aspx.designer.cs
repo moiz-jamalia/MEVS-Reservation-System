@@ -22,5 +22,23 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvTrainComponents;
+
+        /// <summary>
+        /// rbl_Locking control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rbl_Locking;
+
+        /// <summary>
+        /// createComponent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button createComponent;
     }
 }

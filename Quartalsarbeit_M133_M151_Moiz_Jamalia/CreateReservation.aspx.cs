@@ -20,7 +20,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
         private void TrainBind()
         {
-
+            GetTrainTable();
         }
 
         private DataTable GetTrainTable()
@@ -63,6 +63,9 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                 CommandType = CommandType.StoredProcedure
             };
 
+            cmd.Parameters.Add(new SqlParameter("@eMail", SqlDbType.NVarChar, 255));
+            cmd.Parameters["@eMail"].Value = Session["email"].ToString();
+
             SqlDataAdapter dap = new SqlDataAdapter(cmd);
 
             dap.Fill(dt);
@@ -90,7 +93,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                     else if (toDate < DateTime.Now) lbResError.Text = "The end date must not be in the past.";
                     else
                     {
-                        int trainComponentID = int.Parse(ddl_RollingStock.SelectedValue);
+                        int TrainComponentID = int.Parse(ddl_RollingStock.SelectedValue);
                     }
                 }
                 catch
@@ -100,12 +103,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             }
         }
 
-        private void InsertReservation(string eMail, DateTime fromDate, DateTime toDate, string Comment)
-        {
-
-        }
-
-        protected void ChangeTBAndDDL_Click(object sender, EventArgs e)
+        private void InsertReservation(string EMail, DateTime FromDate, DateTime ToDate, string Comment)
         {
 
         }

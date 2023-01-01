@@ -31,4 +31,19 @@
 
         </asp:GridView>
 
+
+        <asp:Label Text="Blocking Rolling Stock" runat="server" CssClass="labelStyle"/>
+        <asp:DropDownList runat="server" />
+         
+        <asp:RadioButtonList ID="rbl_Locking" runat="server">
+            <asp:ListItem Text="Lock" />
+            <asp:ListItem Text="Unlock" />
+        </asp:RadioButtonList>
+
+        <asp:RequiredFieldValidator ErrorMessage="!" ControlToValidate="rbl_Locking" runat="server" />
+
+        <div>
+            <asp:Button ID="createComponent" Text="Create Train Component" runat="server" style="font-weight: bold; bottom: 0; left: 0; position: fixed; margin: 2vh; font-size: 2.5vh;" CssClass="button is-link is-rounded button_background_color"/>
+        </div>
+
 </asp:Content>

@@ -90,14 +90,6 @@ VALUES ((SELECT ID FROM tbl_Status WHERE Status = '1 - Anfrage'), @lastName, @fi
 GO
 
 /* ***************************************************************************** */
-/* Select All Train Components */
-/*
-DROP PROC IF EXISTS sp_SelectTrainComponents;
-GO
-CREATE PROC sp_SelectTrainComponents
-*/
-
-/* ***************************************************************************** */
 /* Select date of a single Member */
 
 DROP PROC IF EXISTS sp_SelectMember;
@@ -249,13 +241,19 @@ ORDER BY M.ID;
 GO
 
 /* ***************************************************************************** */
-/* Select All Train Components */
+/* Select All available Train Components */
 
 DROP PROC IF EXISTS sp_SelectTrainComponents;
 GO
 CREATE PROC sp_SelectTrainComponents
+(
+	@eMail NVARCHAR(255)
+)
 AS
+DECLARE @memberID AS INT
+SELECT @memberID = M.ID FROM tbl_Mitglied AS M WHERE M.eMail = @eMail;
 SELECT R.ID AS "RollmaterialID", CAST(R.Typenbezeichnung AS NVARCHAR(255)) + ' ' + CAST(R.Nr AS NVARCHAR(255)) + ' ' + CAST(R.Beschreibung AS NVARCHAR(255)) + ' ' + CAST(R.Farbe AS NVARCHAR(255)) AS "Rollmaterial"
 FROM tbl_Rollmaterial as R
+WHERE R.FreigabeFuerZugbildung = 1 OR (R.FreigabeFuerZugbildung = 0 AND R.Fk_Mitglied = @memberID)
 ORDER BY R.ID;
 GO

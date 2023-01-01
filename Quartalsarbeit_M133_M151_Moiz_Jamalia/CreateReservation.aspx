@@ -19,15 +19,12 @@
     <div style="position: absolute; top: 25vh; left: 50%; transform: translate(-50%); height: auto; width: 50vw;">
 
         <asp:Label Text="Train:" runat="server" style="margin-right: 2vh; margin-top: 10vh; font-size: 2.5vh;"/>
-        <asp:TextBox ID="tbCreateTrain" runat="server" />
+        <asp:TextBox ID="tbCreateTrain" runat="server" placeholder="Enter Train name..." CssClass="input tbDateStyle"/>
         <asp:RequiredFieldValidator ID="reqFieldVal13" ErrorMessage="!" ControlToValidate="tbCreateTrain" runat="server" CssClass="validator" Display="Dynamic" />
-        <asp:DropDownList ID="ddl_Train" runat="server" />
-        <asp:RequiredFieldValidator ID="reqFieldVal14" ErrorMessage="!" ControlToValidate="ddl_Train" runat="server" CssClass="validator" Display="Dynamic" />
-        <asp:Button ID="changeTBAndDDL" Text="Select/Create Train" runat="server" CausesValidation="false" OnClick="ChangeTBAndDDL_Click" CssClass="button button_background_color is-rounded" />
         <br />
 
         <asp:Label Text="Rolling Stock:" runat="server" style="margin-right: 2vh; margin-top: 10vh; font-size: 2.5vh;" />
-        <asp:DropDownList ID="ddl_RollingStock" runat="server" />
+        <asp:DropDownList ID="ddl_RollingStock" runat="server" CssClass="input tbDateStyle"/>
         <asp:RequiredFieldValidator ID="reqField12" ErrorMessage="!" ControlToValidate="ddl_RollingStock" runat="server" CssClass="validator" Display="Dynamic" />
         <br />
 

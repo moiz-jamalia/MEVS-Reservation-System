@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 {
-    public partial class BlockingTimesOverview : System.Web.UI.Page
+    public partial class CreateTrainComponent : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
