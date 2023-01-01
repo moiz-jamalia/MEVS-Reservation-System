@@ -15,30 +15,48 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.Cookies["secureCookie"] == null) Response.Redirect("~/Login.aspx");
-            else if (Session["isAdmin"].ToString() == "False")
-            {
-                gvTrainComponents.Columns[0].Visible = false;
-            }
-
-            if (!IsPostBack)
-            {
-                GvTrainComponents();
-            }
+            else if (Session["isAdmin"].ToString() == "False") gvTrainComponentsAdmins.Visible = false;
+            else gvTrainComponentsMembers.Visible = false;
+            if (!IsPostBack) GvTrainComponents();
         }
 
         private void GvTrainComponents()
         {
-            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
 
-            con.Open();
-
-            SqlCommand cmd = new SqlCommand("", con)
+            SqlCommand cmd = new SqlCommand("sp_SelectAllTrainComponents", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
 
-            cmd.ExecuteNonQuery();
+            SqlDataAdapter dap = new SqlDataAdapter(cmd);
+
+            con.Open();
+            dap.Fill(dt);
             con.Close();
+
+            CheckIfTableEmpty(gvTrainComponentsAdmins, dt, "No Train Components registered.");
+            CheckIfTableEmpty(gvTrainComponentsMembers, dt, "No Train Components registered.");
+        }
+
+        private void CheckIfTableEmpty(GridView gv, DataTable dt, string msg)
+        {
+            if (dt.Rows.Count > 0)
+            {
+                gv.DataSource = dt;
+                gv.DataBind();
+            }
+            else
+            {
+                dt.Rows.Add(dt.NewRow());
+                gv.DataSource = dt;
+                gv.DataBind();
+                int Columns = gv.Rows[0].Cells.Count;
+                gv.Rows[0].Cells.Clear();
+                gv.Rows[0].Cells.Add(new TableCell());
+                gv.Rows[0].Cells[0].ColumnSpan = Columns;
+                gv.Rows[0].Cells[0].Text = msg;
+            }
         }
 
         protected void GvTrainComponents_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -54,20 +72,35 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
         protected void GvTrainComponents_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            gvTrainComponents.PageIndex = e.NewPageIndex;
+            gvTrainComponentsAdmins.PageIndex = e.NewPageIndex;
             GvTrainComponents();
         }
 
         protected void GvTrainComponents_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
-            gvTrainComponents.EditIndex = -1;
+            gvTrainComponentsAdmins.EditIndex = -1;
             GvTrainComponents();
         }
 
         protected void GvTrainComponents_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            gvTrainComponents.EditIndex = e.NewEditIndex;
+            gvTrainComponentsAdmins.EditIndex = e.NewEditIndex;
             GvTrainComponents();
+        }
+
+        protected void GvTrainComponentsMembers_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+
+        }
+
+        protected void GvTrainComponentsMembers_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+
+        }
+
+        protected void GvTrainComponentsMembers_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+
         }
     }
 }

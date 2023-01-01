@@ -15,22 +15,22 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
     {
 
         /// <summary>
-        /// gvTrainComponents control.
+        /// gvTrainComponentsAdmins control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvTrainComponents;
+        protected global::System.Web.UI.WebControls.GridView gvTrainComponentsAdmins;
 
         /// <summary>
-        /// rbl_Locking control.
+        /// gvTrainComponentsMembers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbl_Locking;
+        protected global::System.Web.UI.WebControls.GridView gvTrainComponentsMembers;
 
         /// <summary>
         /// createComponent control.

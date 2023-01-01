@@ -57,8 +57,6 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
         private bool IsLoginValid()
         {
-            con.Open();
-
             SqlCommand cmd = new SqlCommand("sp_ValidateLogin", con)
             {
                 CommandType = CommandType.StoredProcedure
@@ -69,6 +67,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             cmd.Parameters["@eMail"].Value = tbEmail.Text;
             cmd.Parameters["@Password"].Value = GetHashString(tbPassword.Text);
 
+            con.Open();
             bool IsValid = (int)cmd.ExecuteScalar() >= 1;
             con.Close();
             return IsValid;
@@ -76,7 +75,6 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
         private string GetMemberStatus(string email)
         {
-            con.Open();
             SqlCommand cmd = new SqlCommand("sp_SelectMemberStatus", con)
             {
                 CommandType = CommandType.StoredProcedure
@@ -85,10 +83,12 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             cmd.Parameters.Add(new SqlParameter("@eMail", SqlDbType.NVarChar, 255));
             cmd.Parameters["@eMail"].Value = email;
 
+            con.Open();
+
             SqlDataReader reader = cmd.ExecuteReader();
             Object o = null;
 
-            while(reader.Read()) o = reader[0].ToString(); ;
+            while (reader.Read()) o = reader[0].ToString(); ;
             
             con.Close();
 
@@ -101,8 +101,6 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
         private bool IsMemberAdmin(string email)
         {
-            con.Open();
-
             SqlCommand cmd = new SqlCommand("sp_SelectIsMemberAdmin", con)
             {
                 CommandType = CommandType.StoredProcedure
@@ -111,6 +109,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             cmd.Parameters.Add(new SqlParameter("@eMail", SqlDbType.NVarChar, 255));
             cmd.Parameters["@eMail"].Value = email;
 
+            con.Open();
             bool IsAdmin = (int)cmd.ExecuteScalar() == 1;
             con.Close();
             return IsAdmin;

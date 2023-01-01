@@ -27,8 +27,6 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         {
             DataTable dt = new DataTable();
 
-            con.Open();
-
             SqlCommand cmd = new SqlCommand("", con)
             {
                 CommandType = CommandType.StoredProcedure
@@ -36,6 +34,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
             SqlDataAdapter dap = new SqlDataAdapter(cmd);
 
+            con.Open();
             dap.Fill(dt);
             con.Close();
             return dt;
@@ -56,8 +55,6 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         {
             DataTable dt = new DataTable();
 
-            con.Open();
-
             SqlCommand cmd = new SqlCommand("sp_SelectTrainComponents", con)
             {
                 CommandType = CommandType.StoredProcedure
@@ -68,6 +65,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
             SqlDataAdapter dap = new SqlDataAdapter(cmd);
 
+            con.Open();
             dap.Fill(dt);
             con.Close();
             return dt;
@@ -94,6 +92,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                     else
                     {
                         int TrainComponentID = int.Parse(ddl_RollingStock.SelectedValue);
+                        InsertReservation(Session["email"].ToString(), fromDate, toDate, tbComment.Text, TrainComponentID, tbCreateTrain.Text);
                     }
                 }
                 catch
@@ -103,9 +102,30 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             }
         }
 
-        private void InsertReservation(string EMail, DateTime FromDate, DateTime ToDate, string Comment)
+        private void InsertReservation(string EMail, DateTime FromDate, DateTime ToDate, string Comment, int TrainComponentID, string TrainDesignation)
         {
+            SqlCommand cmd = new SqlCommand("sp_insertReservation", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
 
+            cmd.Parameters.Add(new SqlParameter("@eMail", SqlDbType.NVarChar, 255));
+            cmd.Parameters.Add(new SqlParameter("@fromDate", SqlDbType.DateTime2));
+            cmd.Parameters.Add(new SqlParameter("@toDate", SqlDbType.DateTime2));
+            cmd.Parameters.Add(new SqlParameter("@comment", SqlDbType.NVarChar, 255));
+            cmd.Parameters.Add(new SqlParameter("@trainComponentID", SqlDbType.Int));
+            cmd.Parameters.Add(new SqlParameter("@trainDesignation", SqlDbType.NVarChar, 255));
+
+            cmd.Parameters["@eMail"].Value = EMail;
+            cmd.Parameters["@fromDate"].Value = FromDate;
+            cmd.Parameters["@toDate"].Value = ToDate;
+            cmd.Parameters["@comment"].Value = Comment;
+            cmd.Parameters["@trainComponentID"].Value = TrainComponentID;
+            cmd.Parameters["@trainDesignation"].Value = TrainDesignation;
+
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
     }
 }

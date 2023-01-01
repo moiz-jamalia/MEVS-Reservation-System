@@ -47,8 +47,6 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             DataTable dt = new DataTable();
 
             SqlCommand cmd;
-            
-            con.Open();
 
             if (Session["isAdmin"].ToString() == "False")
             {
@@ -70,6 +68,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
             SqlDataAdapter dap = new SqlDataAdapter(cmd);
 
+            con.Open();
             dap.Fill(dt);
             con.Close();
 
@@ -80,8 +79,6 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         {
             DataTable dt = new DataTable();
 
-            con.Open();
-
             SqlCommand cmd = new SqlCommand("sp_SelectRegistrations", con)
             {
                 CommandType = CommandType.StoredProcedure
@@ -89,6 +86,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
             SqlDataAdapter dap = new SqlDataAdapter(cmd);
 
+            con.Open();
             dap.Fill(dt);
             con.Close();
 
@@ -172,8 +170,6 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             GridViewRow Row = GvMembers.Rows[e.RowIndex];
             if (Row.Cells[3].Text != Session["email"].ToString() && !(IsAdmin(Row.Cells[3].Text)))
             {
-                con.Open();
-
                 SqlCommand cmd = new SqlCommand("sp_DeleteMember", con)
                 {
                     CommandType = CommandType.StoredProcedure
@@ -182,6 +178,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                 cmd.Parameters.Add(new SqlParameter("@eMail", SqlDbType.NVarChar, 255));
                 cmd.Parameters["@eMail"].Value = Row.Cells[3].Text;
                 
+                con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
                 GvBindMembers();
@@ -196,7 +193,6 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
         protected void GvMembers_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            con.Open();
             GridViewRow Row = GvMembers.Rows[e.RowIndex];
 
             GvMembers.EditIndex = -1;
@@ -223,7 +219,8 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             cmd.Parameters["@CurrentEmail"].Value = Row.Cells[3].Text;
             cmd.Parameters["@Handy"].Value = (Row.Cells[4].Controls[0] as TextBox).Text;
             cmd.Parameters["@Comment"].Value = (Row.Cells[5].Controls[0] as TextBox).Text;
-            
+
+            con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
             GvBindAll();
@@ -233,8 +230,6 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         {
             DataTable dt = new DataTable();
 
-            con.Open();
-
             SqlCommand cmd = new SqlCommand("sp_SelectAllStatuses", con)
             {
                 CommandType = CommandType.StoredProcedure
@@ -242,6 +237,8 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
             SqlDataAdapter dap = new SqlDataAdapter(cmd);
 
+
+            con.Open();
             dap.Fill(dt);
             con.Close();
             return dt;

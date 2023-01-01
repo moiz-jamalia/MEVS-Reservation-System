@@ -31,8 +31,6 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         {
             DataTable dt = new DataTable();
 
-            con.Open();
-
             SqlCommand cmd;
 
             if (Session["isAdmin"].ToString() == "False")
@@ -55,6 +53,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
             SqlDataAdapter dap = new SqlDataAdapter(cmd);
 
+            con.Open();
             dap.Fill(dt);
             con.Close();
 
@@ -67,14 +66,13 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         {
             DataTable dt = new DataTable();
 
-            con.Open();
-
             SqlCommand cmd = new SqlCommand("sp_SelectAllReservations", con)
             {
                 CommandType = CommandType.StoredProcedure
             };
 
             SqlDataAdapter dap = new SqlDataAdapter(cmd);
+            con.Open();
             dap.Fill(dt);
             con.Close();
 
@@ -138,8 +136,6 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         {
             DataTable dt = new DataTable();
 
-            con.Open();
-
             SqlCommand cmd = new SqlCommand("", con)
             {
                 CommandType = CommandType.StoredProcedure
@@ -147,6 +143,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
             SqlDataAdapter dap = new SqlDataAdapter(cmd);
 
+            con.Open();
             dap.Fill(dt);
             con.Close();
             return dt;

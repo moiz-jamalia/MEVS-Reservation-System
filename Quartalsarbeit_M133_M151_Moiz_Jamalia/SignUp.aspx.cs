@@ -18,8 +18,6 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         {
             if(Page.IsValid)
             {
-                con.Open();
-
                 SqlCommand cmd = new SqlCommand("sp_InsertMember", con)
                 {
                     CommandType = CommandType.StoredProcedure
@@ -37,7 +35,8 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                 cmd.Parameters["@Handy"].Value = tbMobileNumber.Text;
                 cmd.Parameters["@Password"].Value = GetHashString(tbPassword.Text);
 
-                
+                con.Open();
+
                 int insert = cmd.ExecuteNonQuery();
 
                 if (insert < 0) duplicateEmailVal.IsValid = false;

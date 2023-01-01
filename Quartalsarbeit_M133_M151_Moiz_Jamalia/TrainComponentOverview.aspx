@@ -6,7 +6,6 @@
 
     <div class="navbar_overview">
         <asp:HyperLink Text="Train Components" NavigateUrl="~/TrainComponentOverview.aspx" runat="server" CssClass="active navbar_text"/>
-        <asp:HyperLink Text="Blocking Rolling Stock" NavigateUrl="~/BlockingRollingStockOverview.aspx" runat="server" CssClass="navbar_text"/>
         <asp:HyperLink Text="Reservations" NavigateUrl="~/ReservationOverview.aspx" runat="server" CssClass="navbar_text"/>
         <asp:HyperLink Text="Member Administration" NavigateUrl="~/MembersOverview.aspx" runat="server" CssClass="navbar_text"/>
     </div>
@@ -18,12 +17,30 @@
 
         <asp:Label Text="Train Component Overview" runat="server" CssClass="labelStyle" />
 
-        <asp:GridView ID="gvTrainComponents" runat="server" AutoGenerateColumns="false" OnPageIndexChanging="GvTrainComponents_PageIndexChanging" 
-            OnRowCancelingEdit="GvTrainComponents_RowCancelingEdit" OnRowDeleting="GvTrainComponents_RowDeleting" OnRowEditing="GvTrainComponents_RowEditing"
-            OnRowUpdating="GvTrainComponents_RowUpdating">
+        <asp:GridView ID="gvTrainComponentsAdmins" runat="server" CssClass="table--centered table table is-striped" HeaderStyle-CssClass="thead" RowStyle-CssClass="tr"
+            AutoGenerateColumns="false" OnPageIndexChanging="GvTrainComponents_PageIndexChanging" OnRowCancelingEdit="GvTrainComponents_RowCancelingEdit"
+            OnRowDeleting="GvTrainComponents_RowDeleting" OnRowEditing="GvTrainComponents_RowEditing" OnRowUpdating="GvTrainComponents_RowUpdating">
 
             <Columns>
-
+                <asp:BoundField DataField="ID" HeaderText="ID" />
+                <asp:BoundField DataField="FirstName" HeaderText="First Name" />
+                <asp:BoundField DataField="LastName" HeaderText="Last Name" />
+                <asp:BoundField DataField="Manufacturer" HeaderText="Manufacturer" />
+                <asp:BoundField DataField="Seller" HeaderText="Seller" />
+                <asp:BoundField DataField="RailwayCompany" HeaderText="Railway Company" />
+                <asp:BoundField DataField="Model" HeaderText="Model" />
+                <asp:BoundField DataField="Typenbezeichnung" HeaderText="Type designation" />
+                <asp:BoundField DataField="Nr" HeaderText="No." />
+                <asp:BoundField DataField="Beschreibung" HeaderText="Description" />
+                <asp:BoundField DataField="Kaufpreis" HeaderText="Purchase Price" />
+                <asp:BoundField DataField="ImBesitz" HeaderText="In Possession Since" />
+                <asp:CheckBoxField DataField="Occasion" HeaderText="Occasion" />
+                <asp:BoundField DataField="Veröffentlichung" HeaderText="Publication" />
+                <asp:BoundField DataField="ArtNr" HeaderText="Art. No." />
+                <asp:BoundField DataField="SetNr" HeaderText="Set No." />
+                <asp:BoundField DataField="Farbe" HeaderText="Color" />
+                <asp:BoundField DataField="Bemerkung" HeaderText="Comment" />
+                <asp:CheckBoxField DataField="FreigabeFuerZugbildung" HeaderText="Release for train formation" />
 
                 <asp:CommandField ShowEditButton="true" />
                 <asp:CommandField ShowDeleteButton="true" />
@@ -31,17 +48,36 @@
 
         </asp:GridView>
 
+        <asp:GridView ID="gvTrainComponentsMembers" runat="server" CssClass="table--centered table table is-striped" HeaderStyle-CssClass="thead" RowStyle-CssClass="tr"
+            AutoGenerateColumns="false" OnPageIndexChanging="GvTrainComponentsMembers_PageIndexChanging" OnRowCancelingEdit="GvTrainComponentsMembers_RowCancelingEdit"
+            OnRowEditing="GvTrainComponentsMembers_RowEditing">
 
-        <asp:Label Text="Blocking Rolling Stock" runat="server" CssClass="labelStyle"/>
-        <asp:DropDownList runat="server" />
-         
-        <asp:RadioButtonList ID="rbl_Locking" runat="server">
-            <asp:ListItem Text="Lock" />
-            <asp:ListItem Text="Unlock" />
-        </asp:RadioButtonList>
+            <Columns>
+                <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="true"/>
+                <asp:BoundField DataField="FirstName" HeaderText="First Name" ReadOnly="true" />
+                <asp:BoundField DataField="LastName" HeaderText="Last Name" ReadOnly="true" />
+                <asp:BoundField DataField="Manufacturer" HeaderText="Manufacturer" ReadOnly="true" />
+                <asp:BoundField DataField="Seller" HeaderText="Seller" ReadOnly="true" />
+                <asp:BoundField DataField="RailwayCompany" HeaderText="Railway Company" ReadOnly="true" />
+                <asp:BoundField DataField="Model" HeaderText="Model" ReadOnly="true" />
+                <asp:BoundField DataField="Typenbezeichnung" HeaderText="Type designation" ReadOnly="true" />
+                <asp:BoundField DataField="Nr" HeaderText="No." ReadOnly="true" />
+                <asp:BoundField DataField="Beschreibung" HeaderText="Description" ReadOnly="true" />
+                <asp:BoundField DataField="Kaufpreis" HeaderText="Purchase Price" ReadOnly="true" />
+                <asp:BoundField DataField="ImBesitz" HeaderText="In Possession Since" ReadOnly="true" />
+                <asp:CheckBoxField DataField="Occasion" HeaderText="Occasion" ReadOnly="true" />
+                <asp:BoundField DataField="Veröffentlichung" HeaderText="Publication" ReadOnly="true" />
+                <asp:BoundField DataField="ArtNr" HeaderText="Art. No." ReadOnly="true" />
+                <asp:BoundField DataField="SetNr" HeaderText="Set No." ReadOnly="true" />
+                <asp:BoundField DataField="Farbe" HeaderText="Color" ReadOnly="true" />
+                <asp:BoundField DataField="Bemerkung" HeaderText="Comment" ReadOnly="true" />
+                <asp:CheckBoxField DataField="FreigabeFuerZugbildung" HeaderText="Release for train formation" />
 
-        <asp:RequiredFieldValidator ErrorMessage="!" ControlToValidate="rbl_Locking" runat="server" />
+                <asp:CommandField ShowEditButton="true" />
+            </Columns>
 
+        </asp:GridView>
+        </div>
         <div>
             <asp:Button ID="createComponent" Text="Create Train Component" runat="server" style="font-weight: bold; bottom: 0; left: 0; position: fixed; margin: 2vh; font-size: 2.5vh;" CssClass="button is-link is-rounded button_background_color"/>
         </div>

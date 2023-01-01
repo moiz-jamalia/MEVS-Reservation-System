@@ -241,7 +241,42 @@ ORDER BY M.ID;
 GO
 
 /* ***************************************************************************** */
-/* Select All available Train Components */
+/* Select whole Train Component table */
+
+DROP PROC IF EXISTS sp_SelectAllTrainComponents;
+GO
+CREATE PROC sp_SelectAllTrainComponents
+AS
+SELECT 
+R.ID,
+M.Name AS "FirstName",
+M.Vorname AS "LastName",
+H.Bezeichnung AS "Manufacturer",
+CAST(V.Nachname AS NVARCHAR(255)) + ' ' + CAST(V.Vorname AS NVARCHAR(255)) AS "Seller",
+B.Abkürzung AS "RailwayCompany",
+T.Bezeichnung AS "Model",
+R.Typenbezeichnung,
+R.Nr,
+R.Beschreibung,
+R.Kaufpreis,
+R.ImBesitz,
+R.Occasion,
+R.Veröffentlichung,
+R.ArtNr,
+R.SetNr,
+R.Farbe,
+R.Bemerkung,
+R.FreigabeFuerZugbildung FROM tbl_Rollmaterial AS R
+LEFT JOIN tbl_Mitglied AS M ON R.Fk_Mitglied = M.ID
+LEFT JOIN tbl_Hersteller AS H ON R.FK_Hersteller = H.ID
+LEFT JOIN tbl_Verkäufer AS V ON R.FK_Verkaeufer = V.ID
+LEFT JOIN tbl_Bahngesellschaft AS B ON R.FK_Bahngesellschaft = B.ID
+LEFT JOIN tbl_Typ AS T ON R.FK_Typ = T.ID
+ORDER BY R.ID;
+GO
+
+/* ***************************************************************************** */
+/* Select All available And from Member reserved Train Components */
 
 DROP PROC IF EXISTS sp_SelectTrainComponents;
 GO
@@ -254,6 +289,46 @@ DECLARE @memberID AS INT
 SELECT @memberID = M.ID FROM tbl_Mitglied AS M WHERE M.eMail = @eMail;
 SELECT R.ID AS "RollmaterialID", CAST(R.Typenbezeichnung AS NVARCHAR(255)) + ' ' + CAST(R.Nr AS NVARCHAR(255)) + ' ' + CAST(R.Beschreibung AS NVARCHAR(255)) + ' ' + CAST(R.Farbe AS NVARCHAR(255)) AS "Rollmaterial"
 FROM tbl_Rollmaterial as R
-WHERE R.FreigabeFuerZugbildung = 1 OR (R.FreigabeFuerZugbildung = 0 AND R.Fk_Mitglied = @memberID)
+WHERE (R.FreigabeFuerZugbildung = 1 AND R.Fk_Mitglied IS NULL) OR (R.FreigabeFuerZugbildung = 0 AND R.Fk_Mitglied = @memberID)
 ORDER BY R.ID;
 GO
+
+/* ***************************************************************************** */
+/* create Reservation */
+
+DROP PROC IF EXISTS sp_InsertReservation;
+GO
+CREATE PROC sp_InsertReservation
+(
+	@eMail NVARCHAR(255),
+	@fromDate DATETIME2,
+	@toDate DATETIME2,
+	@comment NVARCHAR(255),
+	@trainComponentID INT,
+	@trainDesignation NVARCHAR(255)
+)
+AS
+SET DATEFORMAT dmy;
+DECLARE @memberID AS INT;
+SELECT @memberID = M.ID FROM tbl_Mitglied AS M WHERE M.eMail = @eMail;
+
+INSERT INTO tbl_Zug (Bezeichnung, FK_Mitglied, ReservationBis, ReservationVon) VALUES (@trainDesignation, @memberID, @toDate, @fromDate);
+
+UPDATE tbl_Rollmaterial SET Fk_Mitglied = @memberID WHERE ID = @trainComponentID;
+
+UPDATE tbl_Rollmaterial SET Bemerkung = @comment WHERE ID = @trainComponentID;
+
+INSERT INTO tbl_Zug_Rollmaterial (FK_Zug, FK_Rollmaterial) VALUES ((SELECT ID FROM tbl_Zug WHERE Bezeichnung = @trainDesignation), (SELECT ID FROM tbl_Rollmaterial WHERE ID = @trainComponentID));
+GO
+
+/* ***************************************************************************** */
+/* set Train Components Blocking */
+
+/*( DROP PROC IF EXISTS sp_UpdateTrainComponentBlocking;
+GO
+CREATE PROC sp_UpdateTrainComponentBlocking
+(
+	@eMail NVARCHAR(255)
+)
+AS
+UPDATE 
