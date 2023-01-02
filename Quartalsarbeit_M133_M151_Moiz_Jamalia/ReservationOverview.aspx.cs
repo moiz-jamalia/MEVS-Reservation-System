@@ -113,7 +113,27 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
         protected void GvReservations_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+            GridViewRow Row = gvReservations.Rows[e.RowIndex];
 
+            SqlCommand cmd = new SqlCommand("sp_DeleteReservation", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            cmd.Parameters.Add(new SqlParameter("@FirstName", SqlDbType.NVarChar, 255));
+            cmd.Parameters.Add(new SqlParameter("@LastName", SqlDbType.NVarChar, 255));
+            cmd.Parameters.Add(new SqlParameter("@trainDesignation", SqlDbType.NVarChar, 255));
+            cmd.Parameters.Add(new SqlParameter("@TrainDesignationID", SqlDbType.Int));
+
+            cmd.Parameters["@FirstName"].Value = Row.Cells[1].Text;
+            cmd.Parameters["@LastName"].Value = Row.Cells[2].Text;
+            cmd.Parameters["@trainDesignation"].Value = Row.Cells[3].Text;
+            cmd.Parameters["@TrainDesignationID"].Value = Row.Cells[0].Text;
+
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+            GvAllReservations();
         }
 
         protected void GvReservations_RowEditing(object sender, GridViewEditEventArgs e)
@@ -136,7 +156,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         {
             DataTable dt = new DataTable();
 
-            SqlCommand cmd = new SqlCommand("", con)
+            SqlCommand cmd = new SqlCommand("sp_SelectTrainComponents", con)
             {
                 CommandType = CommandType.StoredProcedure
             };

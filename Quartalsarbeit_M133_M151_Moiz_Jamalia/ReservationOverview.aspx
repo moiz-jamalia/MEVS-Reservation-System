@@ -25,15 +25,7 @@
                 <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="true" />
                 <asp:BoundField DataField="Name" HeaderText="Last Name" ReadOnly="true" />
                 <asp:BoundField DataField="Vorname" HeaderText="First Name" ReadOnly="true" />
-
-                <asp:TemplateField HeaderText="Train designation">
-                    <EditItemTemplate>
-                        <asp:DropDownList ID="ddl_Train" runat="server" />
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="lbTrain" Text='<%# Eval("Zugbezeichnung") %>' runat="server" />
-                    </ItemTemplate>
-                </asp:TemplateField>
+                <asp:BoundField DataField="Zugbezeichnung" HeaderText="Train Designation" />
 
                 <asp:TemplateField HeaderText="Train Components">
                     <EditItemTemplate>

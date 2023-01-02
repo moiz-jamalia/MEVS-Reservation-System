@@ -13,13 +13,14 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceHolderMain" runat="server">
 
-    <div class="GVStyle">
+    <div class="GVStyle" style="top: 10% !important;">
 
         <asp:Label Text="Train Component Overview" runat="server" CssClass="labelStyle" />
 
         <asp:GridView ID="gvTrainComponentsAdmins" runat="server" CssClass="table--centered table table is-striped" HeaderStyle-CssClass="thead" RowStyle-CssClass="tr"
-            AutoGenerateColumns="false" OnPageIndexChanging="GvTrainComponents_PageIndexChanging" OnRowCancelingEdit="GvTrainComponents_RowCancelingEdit"
-            OnRowDeleting="GvTrainComponents_RowDeleting" OnRowEditing="GvTrainComponents_RowEditing" OnRowUpdating="GvTrainComponents_RowUpdating">
+            AutoGenerateColumns="false" OnPageIndexChanging="GvTrainComponentsAdmins_PageIndexChanging" OnRowCancelingEdit="GvTrainComponentsAdmins_RowCancelingEdit"
+            OnRowDeleting="GvTrainComponentsAdmins_RowDeleting" OnRowEditing="GvTrainComponentsAdmins_RowEditing" OnRowUpdating="GvTrainComponentsAdmins_RowUpdating"
+            OnRowDataBound="GvTrainComponentsAdmins_RowDataBound" >
 
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" />
@@ -44,13 +45,16 @@
 
                 <asp:CommandField ShowEditButton="true" />
                 <asp:CommandField ShowDeleteButton="true" />
+
             </Columns>
+
+            <RowStyle Width="150px"/>
 
         </asp:GridView>
 
         <asp:GridView ID="gvTrainComponentsMembers" runat="server" CssClass="table--centered table table is-striped" HeaderStyle-CssClass="thead" RowStyle-CssClass="tr"
             AutoGenerateColumns="false" OnPageIndexChanging="GvTrainComponentsMembers_PageIndexChanging" OnRowCancelingEdit="GvTrainComponentsMembers_RowCancelingEdit"
-            OnRowEditing="GvTrainComponentsMembers_RowEditing">
+            OnRowEditing="GvTrainComponentsMembers_RowEditing" OnRowUpdating="GvTrainComponentsMembers_RowUpdating" OnRowDataBound="GvTrainComponentsMembers_RowDataBound">
 
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="true"/>
@@ -71,12 +75,16 @@
                 <asp:BoundField DataField="SetNr" HeaderText="Set No." ReadOnly="true" />
                 <asp:BoundField DataField="Farbe" HeaderText="Color" ReadOnly="true" />
                 <asp:BoundField DataField="Bemerkung" HeaderText="Comment" ReadOnly="true" />
-                <asp:CheckBoxField DataField="FreigabeFuerZugbildung" HeaderText="Release for train formation" />
+                <asp:BoundField DataField="FreigabeFuerZugbildung" HeaderText="Release for train formation" />
 
                 <asp:CommandField ShowEditButton="true" />
+
             </Columns>
 
         </asp:GridView>
+
+        <asp:Label ID="lbtest" Text="tEST" runat="server" />
+
         </div>
         <div>
             <asp:Button ID="createComponent" Text="Create Train Component" runat="server" style="font-weight: bold; bottom: 0; left: 0; position: fixed; margin: 2vh; font-size: 2.5vh;" CssClass="button is-link is-rounded button_background_color"/>

@@ -46,17 +46,17 @@
                 <asp:BoundField DataField="Handy" HeaderText="Handy" />
                 <asp:BoundField DataField="Bemerkung" HeaderText="Comment" />
 
-             <asp:TemplateField HeaderText="Status">
+                 <asp:TemplateField HeaderText="Status">
 
-                 <EditItemTemplate>
-                     <asp:DropDownList ID="ddl_Status" runat="server" />
-                 </EditItemTemplate>
+                     <EditItemTemplate>
+                         <asp:DropDownList ID="ddl_Status" runat="server" />
+                     </EditItemTemplate>
 
-                 <ItemTemplate>
-                     <asp:label runat="server" Text='<%# Eval("Status") %>'/>
-                 </ItemTemplate>
+                     <ItemTemplate>
+                         <asp:label runat="server" Text='<%# Eval("Status") %>'/>
+                     </ItemTemplate>
 
-             </asp:TemplateField>
+                 </asp:TemplateField>
 
                 <asp:CommandField ShowEditButton="true" />
                 <asp:CommandField ShowDeleteButton="true" />

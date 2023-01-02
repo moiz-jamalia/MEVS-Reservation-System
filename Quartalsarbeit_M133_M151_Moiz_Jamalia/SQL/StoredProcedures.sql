@@ -294,6 +294,37 @@ ORDER BY R.ID;
 GO
 
 /* ***************************************************************************** */
+/* Create Train Component */
+
+DROP PROC IF EXISTS sp_CreateTrainComponent;
+GO
+CREATE PROC sp_CreateTrainComponent
+(
+	@FKMitglied INT, 
+	@FKHersteller INT, 
+	@FKVerkaeufer INT,
+	@FKBahngesellschaft INT,
+	@FKTyp INT,
+	@typenbezeichnung NVARCHAR(255),
+	@rollNr NVARCHAR(255),
+	@beschreibung NVARCHAR(255),
+	@kaufpreis MONEY,
+	@imBesitz NVARCHAR(255),
+	@occasion BIT,
+	@veröffentlichung NVARCHAR(255),
+	@artNr NVARCHAR(255),
+	@setNr NVARCHAR(255),
+	@farbe NVARCHAR(255),
+	@bemerkung NVARCHAR(255),
+	@freigabe BIT
+)
+AS
+INSERT INTO tbl_Rollmaterial (Fk_Mitglied, FK_Hersteller, FK_Verkaeufer, FK_Bahngesellschaft, FK_Typ,
+Typenbezeichnung, Nr, Beschreibung, Kaufpreis, ImBesitz, Occasion, Veröffentlichung, ArtNr, SetNr, Farbe, Bemerkung, FreigabeFuerZugbildung)
+VALUES (@FKMitglied, @FKHersteller, @FKVerkaeufer, @FKBahngesellschaft, @FKTyp, @typenbezeichnung, @rollNr, @beschreibung, @kaufpreis, @imBesitz, @occasion, @veröffentlichung, @artNr, @setNr, @farbe, @bemerkung, @freigabe);
+GO
+
+/* ***************************************************************************** */
 /* create Reservation */
 
 DROP PROC IF EXISTS sp_InsertReservation;
@@ -322,9 +353,36 @@ INSERT INTO tbl_Zug_Rollmaterial (FK_Zug, FK_Rollmaterial) VALUES ((SELECT ID FR
 GO
 
 /* ***************************************************************************** */
+/* Delete Reservation */
+
+DROP PROC IF EXISTS sp_DeleteReservation;
+GO
+CREATE PROC sp_DeleteReservation
+(
+	@FirstName NVARCHAR(255),
+	@LastName NVARCHAR(255),
+	@trainDesignation NVARCHAR(255),
+	@TrainDesignationID INT
+)
+AS
+DECLARE @memberID AS INT
+SELECT @memberID = M.ID FROM tbl_Mitglied AS M WHERE M.Vorname = @FirstName AND M.Name = @LastName;
+
+DECLARE @trainComponentID AS INT
+SELECT @trainComponentID = ZR.FK_Rollmaterial FROM tbl_Zug_Rollmaterial AS ZR WHERE ZR.FK_Zug = @TrainDesignationID;
+
+DELETE FROM tbl_Zug_Rollmaterial WHERE FK_Zug = (SELECT ID FROM tbl_Zug WHERE Bezeichnung = @trainDesignation) AND FK_Rollmaterial = (SELECT ID FROM tbl_Rollmaterial WHERE ID = @trainComponentID);
+
+DELETE FROM tbl_Zug WHERE ID = @TrainDesignationID;
+
+UPDATE tbl_Rollmaterial SET Fk_Mitglied = NULL WHERE ID = @trainComponentID;
+
+UPDATE tbl_Rollmaterial SET Bemerkung = NULL WHERE ID = @trainComponentID;
+
+/* ***************************************************************************** */
 /* set Train Components Blocking */
 
-/*( DROP PROC IF EXISTS sp_UpdateTrainComponentBlocking;
+/* DROP PROC IF EXISTS sp_UpdateTrainComponentBlocking;
 GO
 CREATE PROC sp_UpdateTrainComponentBlocking
 (
@@ -332,3 +390,4 @@ CREATE PROC sp_UpdateTrainComponentBlocking
 )
 AS
 UPDATE 
+*/

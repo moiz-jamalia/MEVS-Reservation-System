@@ -237,7 +237,6 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
             SqlDataAdapter dap = new SqlDataAdapter(cmd);
 
-
             con.Open();
             dap.Fill(dt);
             con.Close();

@@ -93,6 +93,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                     {
                         int TrainComponentID = int.Parse(ddl_RollingStock.SelectedValue);
                         InsertReservation(Session["email"].ToString(), fromDate, toDate, tbComment.Text, TrainComponentID, tbCreateTrain.Text);
+                        Response.Redirect("~/ReservationOverview.aspx");
                     }
                 }
                 catch

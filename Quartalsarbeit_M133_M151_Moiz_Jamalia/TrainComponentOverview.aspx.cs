@@ -15,7 +15,18 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.Cookies["secureCookie"] == null) Response.Redirect("~/Login.aspx");
-            else if (Session["isAdmin"].ToString() == "False") gvTrainComponentsAdmins.Visible = false;
+            else if (Session["isAdmin"].ToString() == "False")
+            {
+                gvTrainComponentsAdmins.Visible = false;
+
+                for (int Row = 0; Row < gvTrainComponentsMembers.Rows.Count; Row++)
+                {
+                    bool Release = gvTrainComponentsMembers.Rows[Row].Cells[18].ToString() == "False"; //if bit is 1
+
+                    if (Release) for (int Row1 = 0; Row1 < gvTrainComponentsMembers.Rows.Count; Row1++) gvTrainComponentsMembers.Rows[Row1].Cells[18].Enabled = false;
+                    else break;
+                }
+            }
             else gvTrainComponentsMembers.Visible = false;
             if (!IsPostBack) GvTrainComponents();
         }
@@ -45,6 +56,8 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             {
                 gv.DataSource = dt;
                 gv.DataBind();
+
+                lbtest.Text = gv.Rows[1].Cells[18].Text;
             }
             else
             {
@@ -59,46 +72,64 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             }
         }
 
-        protected void GvTrainComponents_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        protected void GvTrainComponentsAdmins_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
 
         }
 
 
-        protected void GvTrainComponents_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        protected void GvTrainComponentsAdmins_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
 
         }
 
-        protected void GvTrainComponents_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void GvTrainComponentsAdmins_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvTrainComponentsAdmins.PageIndex = e.NewPageIndex;
             GvTrainComponents();
         }
 
-        protected void GvTrainComponents_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        protected void GvTrainComponentsAdmins_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvTrainComponentsAdmins.EditIndex = -1;
             GvTrainComponents();
         }
 
-        protected void GvTrainComponents_RowEditing(object sender, GridViewEditEventArgs e)
+        protected void GvTrainComponentsAdmins_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gvTrainComponentsAdmins.EditIndex = e.NewEditIndex;
             GvTrainComponents();
         }
 
+        protected void GvTrainComponentsAdmins_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+          
+        }
+
         protected void GvTrainComponentsMembers_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-
+            gvTrainComponentsMembers.PageIndex = e.NewPageIndex;
+            GvTrainComponents();
         }
 
         protected void GvTrainComponentsMembers_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
-
+            gvTrainComponentsMembers.EditIndex = -1;
+            GvTrainComponents();
         }
 
         protected void GvTrainComponentsMembers_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvTrainComponentsMembers.EditIndex = e.NewEditIndex;
+            GvTrainComponents();
+        }
+
+        protected void GvTrainComponentsMembers_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            
+        }
+
+        protected void GvTrainComponentsMembers_RowDataBound(object sender, GridViewRowEventArgs e)
         {
 
         }
