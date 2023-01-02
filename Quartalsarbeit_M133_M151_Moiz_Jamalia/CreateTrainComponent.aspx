@@ -15,5 +15,8 @@
 
     <asp:Label Text="Add new Train Component" runat="server" style="font-size: 3.7vh; font-weight: bold; position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%);"/>
 
+    <div>
+    <asp:TextBox ID="ID" runat="server" />
 
+    </div>
 </asp:Content>

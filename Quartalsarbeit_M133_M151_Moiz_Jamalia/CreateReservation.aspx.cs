@@ -18,28 +18,6 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             if (!IsPostBack) DDLRollingStockBind();
         }
 
-        private void TrainBind()
-        {
-            GetTrainTable();
-        }
-
-        private DataTable GetTrainTable()
-        {
-            DataTable dt = new DataTable();
-
-            SqlCommand cmd = new SqlCommand("", con)
-            {
-                CommandType = CommandType.StoredProcedure
-            };
-
-            SqlDataAdapter dap = new SqlDataAdapter(cmd);
-
-            con.Open();
-            dap.Fill(dt);
-            con.Close();
-            return dt;
-        }
-
         private void DDLRollingStockBind()
         {
             DropDownList ddl = ddl_RollingStock;

@@ -145,7 +145,7 @@ WHERE eMail = @eMail;
 GO
 
 /* ***************************************************************************** */
-/* Delete Member Status */
+/* Delete Member */
 
 DROP PROC IF EXISTS sp_DeleteMember;
 GO
@@ -164,6 +164,8 @@ ON ZR.FK_Zug = Z.ID
 WHERE Z.FK_Mitglied = @DeletedMemberID;
 
 UPDATE tbl_Rollmaterial SET Fk_Mitglied = NULL WHERE Fk_Mitglied = @DeletedMemberID;
+
+UPDATE tbl_Rollmaterial SET Bemerkung = NULL WHERE Fk_Mitglied = @DeletedMemberID;
 
 DELETE FROM tbl_Zug WHERE FK_Mitglied = @DeletedMemberID;
 
@@ -213,7 +215,14 @@ DROP PROC IF EXISTS sp_SelectAllReservations;
 GO
 CREATE PROC sp_SelectAllReservations
 AS
-SELECT Z.ID, M.Name, M.Vorname, Z.Bezeichnung AS "Zugbezeichnung", CAST(R.Typenbezeichnung AS NVARCHAR(255)) + ' ' + CAST(R.Nr AS NVARCHAR(255)) + ' ' + CAST(R.Beschreibung AS NVARCHAR(255)) + ' ' + CAST(R.Farbe AS NVARCHAR(255)) AS "Rollmaterial", (FORMAT (Z.ReservationVon, 'dd.MM.yy HH:mm')) AS 'Von', (FORMAT (Z.ReservationBis, 'dd.MM.yy HH:mm')) AS 'Bis' 
+SELECT
+Z.ID,
+M.Name,
+M.Vorname,
+Z.Bezeichnung AS "Zugbezeichnung",
+CAST(R.Typenbezeichnung AS NVARCHAR(255)) + ' ' + CAST(R.Nr AS NVARCHAR(255)) + ' ' + CAST(R.Beschreibung AS NVARCHAR(255)) + ' ' + CAST(R.Farbe AS NVARCHAR(255)) AS "Rollmaterial",
+(FORMAT (Z.ReservationVon, 'dd.MM.yy HH:mm')) AS 'Von',
+(FORMAT (Z.ReservationBis, 'dd.MM.yy HH:mm')) AS 'Bis' 
 FROM tbl_Mitglied AS M
 JOIN tbl_Zug AS Z ON Z.FK_Mitglied = M.ID
 LEFT JOIN tbl_Zug_Rollmaterial AS ZR ON Z.ID = ZR.FK_Zug 
@@ -231,7 +240,14 @@ CREATE PROC sp_SelectOwnReservations
 	@eMail NVARCHAR(255)
 )
 AS
-SELECT Z.ID, M.Name, M.Vorname, Z.Bezeichnung AS "Zugbezeichnung", CAST(R.Typenbezeichnung AS NVARCHAR(255)) + ' ' + CAST(R.Nr AS NVARCHAR(255)) + ' ' + CAST(R.Beschreibung AS NVARCHAR(255)) + ' ' + CAST(R.Farbe AS NVARCHAR(255)) AS "Rollmaterial", (FORMAT (Z.ReservationVon, 'dd.MM.yy HH:mm')) AS 'Von', (FORMAT (Z.ReservationBis, 'dd.MM.yy HH:mm')) AS 'Bis' 
+SELECT 
+Z.ID,
+M.Name,
+M.Vorname,
+Z.Bezeichnung AS "Zugbezeichnung",
+CAST(R.Typenbezeichnung AS NVARCHAR(255)) + ' ' + CAST(R.Nr AS NVARCHAR(255)) + ' ' + CAST(R.Beschreibung AS NVARCHAR(255)) + ' ' + CAST(R.Farbe AS NVARCHAR(255)) AS "Rollmaterial",
+(FORMAT (Z.ReservationVon, 'dd.MM.yy HH:mm')) AS 'Von',
+(FORMAT (Z.ReservationBis, 'dd.MM.yy HH:mm')) AS 'Bis' 
 FROM tbl_Mitglied AS M
 JOIN tbl_Zug AS Z ON Z.FK_Mitglied = M.ID
 LEFT JOIN tbl_Zug_Rollmaterial AS ZR ON Z.ID = ZR.FK_Zug 
@@ -287,18 +303,20 @@ CREATE PROC sp_SelectTrainComponents
 AS
 DECLARE @memberID AS INT
 SELECT @memberID = M.ID FROM tbl_Mitglied AS M WHERE M.eMail = @eMail;
-SELECT R.ID AS "RollmaterialID", CAST(R.Typenbezeichnung AS NVARCHAR(255)) + ' ' + CAST(R.Nr AS NVARCHAR(255)) + ' ' + CAST(R.Beschreibung AS NVARCHAR(255)) + ' ' + CAST(R.Farbe AS NVARCHAR(255)) AS "Rollmaterial"
+SELECT 
+R.ID AS "RollmaterialID", 
+CAST(R.Typenbezeichnung AS NVARCHAR(255)) + ' ' + CAST(R.Nr AS NVARCHAR(255)) + ' ' + CAST(R.Beschreibung AS NVARCHAR(255)) + ' ' + CAST(R.Farbe AS NVARCHAR(255)) AS "Rollmaterial"
 FROM tbl_Rollmaterial as R
 WHERE (R.FreigabeFuerZugbildung = 1 AND R.Fk_Mitglied IS NULL) OR (R.FreigabeFuerZugbildung = 0 AND R.Fk_Mitglied = @memberID)
 ORDER BY R.ID;
 GO
 
 /* ***************************************************************************** */
-/* Create Train Component */
+/* Insert Train Component */
 
-DROP PROC IF EXISTS sp_CreateTrainComponent;
+DROP PROC IF EXISTS sp_InsertTrainComponent;
 GO
-CREATE PROC sp_CreateTrainComponent
+CREATE PROC sp_InsertTrainComponent
 (
 	@FKMitglied INT, 
 	@FKHersteller INT, 
@@ -321,7 +339,26 @@ CREATE PROC sp_CreateTrainComponent
 AS
 INSERT INTO tbl_Rollmaterial (Fk_Mitglied, FK_Hersteller, FK_Verkaeufer, FK_Bahngesellschaft, FK_Typ,
 Typenbezeichnung, Nr, Beschreibung, Kaufpreis, ImBesitz, Occasion, Veröffentlichung, ArtNr, SetNr, Farbe, Bemerkung, FreigabeFuerZugbildung)
-VALUES (@FKMitglied, @FKHersteller, @FKVerkaeufer, @FKBahngesellschaft, @FKTyp, @typenbezeichnung, @rollNr, @beschreibung, @kaufpreis, @imBesitz, @occasion, @veröffentlichung, @artNr, @setNr, @farbe, @bemerkung, @freigabe);
+VALUES 
+(
+@FKMitglied,
+@FKHersteller,
+@FKVerkaeufer,
+@FKBahngesellschaft,
+@FKTyp,
+@typenbezeichnung,
+@rollNr,
+@beschreibung,
+@kaufpreis,
+@imBesitz,
+@occasion,
+@veröffentlichung,
+@artNr,
+@setNr,
+@farbe,
+@bemerkung,
+@freigabe
+);
 GO
 
 /* ***************************************************************************** */
@@ -378,6 +415,37 @@ DELETE FROM tbl_Zug WHERE ID = @TrainDesignationID;
 UPDATE tbl_Rollmaterial SET Fk_Mitglied = NULL WHERE ID = @trainComponentID;
 
 UPDATE tbl_Rollmaterial SET Bemerkung = NULL WHERE ID = @trainComponentID;
+
+/* ***************************************************************************** */
+/* Update Reservation */
+
+DROP PROC IF EXISTS sp_UpdateReservation;
+GO
+CREATE PROC sp_UpdateReservation
+(
+	@firstName NVARCHAR(255),
+	@lastName NVARCHAR(255),
+	@trainDesignation NVARCHAR(255),
+	@trainDesignationID INT
+)
+AS
+DECLARE @memberID AS INT;
+SELECT @memberID = M.ID FROM tbl_Mitglied AS M WHERE M.Vorname = @firstName AND M.Name = @lastName;
+
+DECLARE @oldTrainComponentID AS INT;
+SELECT @oldTrainComponentID = 
+
+DECLARE @oldTrainDesignation AS NVARCHAR(255);
+SELECT @oldTrainDesignation = Z.Bezeichnung FROM tbl_Zug AS Z WHERE 
+
+DECLARE @trainComponentID AS INT;
+SELECT @trainComponentID = ZR.FK_Rollmaterial FROM tbl_Zug_Rollmaterial AS ZR WHERE ZR.FK_Zug = @trainDesignationID;
+
+UPDATE tbl_Zug_Rollmaterial SET FK_Rollmaterial = @trainComponentID ;
+
+UPDATE tbl_Rollmaterial SET Fk_Mitglied = (SELECT ZR.FK_Zug FROM tbl_Zug_Rollmaterial AS ZR WHERE )
+
+UPDATE tbl_Zug SET Bezeichnung = @trainDesignation WHERE FK_Mitglied = @memberID AND Bezeichnung = ;
 
 /* ***************************************************************************** */
 /* set Train Components Blocking */

@@ -149,7 +149,22 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
         protected void GvReservations_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if ((e.Row.RowState & DataControlRowState.Edit) > 0)
+                {
+                    DropDownList ddl = e.Row.FindControl("ddl_TrainComponent") as DropDownList;
 
+                    DataTable dt = GetTrainComponentTable();
+                    ddl.DataSource = dt;
+                    ddl.DataTextField = "Rollmaterial";
+                    ddl.DataValueField = "ID";
+                    ddl.DataBind();
+
+                    DataRowView drv = e.Row.DataItem as DataRowView;
+                    ddl.SelectedValue = drv["RollmaterialID"].ToString();
+                }
+            }
         }
 
         private DataTable GetTrainComponentTable()
