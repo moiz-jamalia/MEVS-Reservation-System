@@ -595,7 +595,7 @@ GO
 /* ***************************************************************************** */
 /* Select Manufacturer */
 
-DROP PROC IF EXISTS sp_SelectManufactuerer;
+DROP PROC IF EXISTS sp_SelectManufacturer;
 GO
 CREATE PROC sp_SelectManufacturer
 AS
