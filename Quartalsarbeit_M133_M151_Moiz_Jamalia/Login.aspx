@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Quartalsarbeit_M133_M151_Moiz_Jamalia.Login" %>
+﻿<%@ Page Title="Login" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Quartalsarbeit_M133_M151_Moiz_Jamalia.Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PlaceHolderHeader" runat="server">
     <link media="screen" href="styles.css" rel="stylesheet" />
@@ -9,18 +9,24 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceHolderMain" runat="server">
 
     <div class="login">
-        <asp:Label Text="E-Mail" runat="server" /><br />
+        <asp:Label Text="E-Mail" runat="server" />
+        <br />
 
         <asp:TextBox ID="tbEmail" runat="server" CssClass="input input-box" placeholder="enter E-Mail..." />
         <asp:RequiredFieldValidator ID="reqFieldVal7" ErrorMessage="!" ControlToValidate="tbEmail" runat="server" CssClass="validator" Display="Dynamic" />
-        <asp:RegularExpressionValidator ID="regexVal1" ErrorMessage="!" ControlToValidate="tbEmail" runat="server" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="validator" Display="Dynamic" /> <br />
+        <asp:RegularExpressionValidator ID="regexVal1" ErrorMessage="!" ControlToValidate="tbEmail" runat="server" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
+            CssClass="validator" Display="Dynamic" />
+        <br />
 
-        <asp:Label Text="Password" runat="server" /><br />
+        <asp:Label Text="Password" runat="server" />
+        <br />
 
         <asp:TextBox ID="tbPassword" runat="server" TextMode="Password" CssClass="input input-box" placeholder="enter Password..." />
-        <asp:RequiredFieldValidator ID="reqFieldVal8" ErrorMessage="!" ControlToValidate="tbPassword" runat="server" CssClass="validator" Display="Dynamic" /><br />
+        <asp:RequiredFieldValidator ID="reqFieldVal8" ErrorMessage="!" ControlToValidate="tbPassword" runat="server" CssClass="validator" Display="Dynamic" />
+        <br />
 
-        <asp:Label ID="lbInvalidLogin" runat="server" CssClass="validator" /><br />
+        <asp:Label ID="lbInvalidLogin" runat="server" CssClass="validator" />
+        <br />
 
         <div class="submit">
             <asp:Button ID="btnLogIn" Text="Log In" type="submit" OnClick="BtnLogIn_Click" runat="server" CssClass="button is-link is-rounded button_background_color" />

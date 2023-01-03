@@ -1,14 +1,16 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ReservationOverview.aspx.cs" Inherits="Quartalsarbeit_M133_M151_Moiz_Jamalia.Reservation" %>
+﻿<%@ Page Title="MEVS - Reservation Overview" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ReservationOverview.aspx.cs"
+    Inherits="Quartalsarbeit_M133_M151_Moiz_Jamalia.Reservation" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="PlaceHolderHeader" runat="server">
 
     <link rel="stylesheet" runat="server" media="screen" href="styles.css" /> 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 
-    <div class="navbar_overview">
+    <span class="navbar_overview">
         <asp:HyperLink Text="Train Components" NavigateUrl="~/TrainComponentOverview.aspx" runat="server" CssClass="navbar_text"/>
         <asp:HyperLink Text="Reservations" NavigateUrl="~/ReservationOverview.aspx" runat="server" CssClass="active navbar_text"/>
         <asp:HyperLink Text="Member Administration" NavigateUrl="~/MembersOverview.aspx" runat="server" CssClass="navbar_text"/>
-    </div>
+    </span>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceHolderMain" runat="server">
@@ -36,8 +38,9 @@
                     </ItemTemplate>
                 </asp:TemplateField>
               
-                <asp:BoundField DataField="Von" HeaderText="From" ReadOnly="true" />
-                <asp:BoundField DataField="Bis" HeaderText="To" ReadOnly="true" />
+                <asp:BoundField DataField="Von" HeaderText="From" />
+                <asp:BoundField DataField="Bis" HeaderText="To" />
+                <asp:BoundField DataField="Bemerkung" HeaderText="Comment" />
 
                 <asp:CommandField ShowEditButton="true" />
                 <asp:CommandField ShowDeleteButton="true" />
@@ -58,6 +61,7 @@
                 <asp:BoundField DataField="Rollmaterial" HeaderText="Train Components" ReadOnly="true" />
                 <asp:BoundField DataField="Von" HeaderText="From" ReadOnly="true" />
                 <asp:BoundField DataField="Bis" HeaderText="To" ReadOnly="true" />
+                <asp:BoundField DataField="Bemerkung" HeaderText="Comment" ReadOnly="true" />
 
             </Columns>
 

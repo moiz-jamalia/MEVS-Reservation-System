@@ -38,9 +38,6 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                 CommandType = CommandType.StoredProcedure
             };
 
-            cmd.Parameters.Add(new SqlParameter("@eMail", SqlDbType.NVarChar, 255));
-            cmd.Parameters["@eMail"].Value = Session["email"].ToString();
-
             SqlDataAdapter dap = new SqlDataAdapter(cmd);
 
             con.Open();
@@ -70,6 +67,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                     else
                     {
                         int TrainComponentID = int.Parse(ddl_RollingStock.SelectedValue);
+
                         InsertReservation(Session["email"].ToString(), fromDate, toDate, tbComment.Text, TrainComponentID, tbCreateTrain.Text);
                         Response.Redirect("~/ReservationOverview.aspx");
                     }
@@ -81,6 +79,32 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             }
         }
 
+        private bool IsBlocked()
+        {
+            return true;
+        }
+
+        private int OverlapsReservation(int TrainDesignationID, DateTime FromDate, DateTime ToDate)
+        {
+            SqlCommand cmd = new SqlCommand("sp_SelectOverlapsReservation", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            cmd.Parameters.Add(new SqlParameter("@trainDesignationID", SqlDbType.Int));
+            cmd.Parameters.Add(new SqlParameter("@fromDate", SqlDbType.DateTime2));
+            cmd.Parameters.Add(new SqlParameter("@toDate", SqlDbType.DateTime2));
+
+            cmd.Parameters["@trainDesignationID"].Value = TrainDesignationID;
+            cmd.Parameters["@fromDate"].Value = FromDate;
+            cmd.Parameters["@toDate"].Value = ToDate;
+
+            con.Open();
+            int overlaps = (int)cmd.ExecuteScalar();
+            con.Close();
+            return overlaps;
+        }
+        
         private void InsertReservation(string EMail, DateTime FromDate, DateTime ToDate, string Comment, int TrainComponentID, string TrainDesignation)
         {
             SqlCommand cmd = new SqlCommand("sp_insertReservation", con)

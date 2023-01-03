@@ -33,21 +33,30 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         protected global::System.Web.UI.WebControls.GridView gvTrainComponentsMembers;
 
         /// <summary>
-        /// lbtest control.
+        /// btnCreateComponent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbtest;
+        protected global::System.Web.UI.WebControls.Button btnCreateComponent;
 
         /// <summary>
-        /// createComponent control.
+        /// btnAddManufacturer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button createComponent;
+        protected global::System.Web.UI.WebControls.Button btnAddManufacturer;
+
+        /// <summary>
+        /// btnAddRailWayCompany control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddRailWayCompany;
     }
 }

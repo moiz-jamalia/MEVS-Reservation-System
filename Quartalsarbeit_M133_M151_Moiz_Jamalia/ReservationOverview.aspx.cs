@@ -144,7 +144,36 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
 
         protected void GvReservations_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
+            GridViewRow Row = gvReservations.Rows[e.RowIndex];
+            gvReservations.EditIndex = -1;
 
+            SqlCommand cmd = new SqlCommand("sp_UpdateReservation", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            cmd.Parameters.Add(new SqlParameter("@oldTrainDesignationID", SqlDbType.Int));
+            cmd.Parameters.Add(new SqlParameter("@firstName", SqlDbType.NVarChar, 255));
+            cmd.Parameters.Add(new SqlParameter("@lastName", SqlDbType.NVarChar, 255));
+            cmd.Parameters.Add(new SqlParameter("@newTrainDesignation", SqlDbType.NVarChar, 255));
+            cmd.Parameters.Add(new SqlParameter("@newTrainComponentID", SqlDbType.Int));
+            cmd.Parameters.Add(new SqlParameter("@fromDate", SqlDbType.DateTime2));
+            cmd.Parameters.Add(new SqlParameter("@toDate", SqlDbType.DateTime2));
+            cmd.Parameters.Add(new SqlParameter("@comment", SqlDbType.NVarChar, 255));
+
+            cmd.Parameters["@oldTrainDesignationID"].Value = Row.Cells[0].Text;
+            cmd.Parameters["@firstName"].Value = Row.Cells[2].Text;
+            cmd.Parameters["@lastName"].Value = Row.Cells[1].Text;
+            cmd.Parameters["@newTrainDesignation"].Value = (Row.Cells[3].Controls[0] as TextBox).Text;
+            cmd.Parameters["@newTrainComponentID"].Value = (Row.FindControl("ddl_TrainComponent") as DropDownList).SelectedValue;
+            cmd.Parameters["@fromDate"].Value = (Row.Cells[5].Controls[0] as TextBox).Text;
+            cmd.Parameters["@toDate"].Value = (Row.Cells[6].Controls[0] as TextBox).Text;
+            cmd.Parameters["@comment"].Value = (Row.Cells[7].Controls[0] as TextBox).Text;
+
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+            GvAllReservations();
         }
 
         protected void GvReservations_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -158,11 +187,11 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                     DataTable dt = GetTrainComponentTable();
                     ddl.DataSource = dt;
                     ddl.DataTextField = "Rollmaterial";
-                    ddl.DataValueField = "ID";
+                    ddl.DataValueField = "RollmaterialID";
                     ddl.DataBind();
 
                     DataRowView drv = e.Row.DataItem as DataRowView;
-                    ddl.SelectedValue = drv["RollmaterialID"].ToString();
+                    ddl.SelectedValue = drv["ID"].ToString();
                 }
             }
         }

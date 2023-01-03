@@ -15,18 +15,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.Cookies["secureCookie"] == null) Response.Redirect("~/Login.aspx");
-            else if (Session["isAdmin"].ToString() == "False")
-            {
-                gvTrainComponentsAdmins.Visible = false;
-
-                for (int Row = 0; Row < gvTrainComponentsMembers.Rows.Count; Row++)
-                {
-                    bool Release = gvTrainComponentsMembers.Rows[Row].Cells[18].ToString() == "False"; //if bit is 1
-
-                    if (Release) for (int Row1 = 0; Row1 < gvTrainComponentsMembers.Rows.Count; Row1++) gvTrainComponentsMembers.Rows[Row1].Cells[18].Enabled = false;
-                    else break;
-                }
-            }
+            else if (Session["isAdmin"].ToString() == "False") gvTrainComponentsAdmins.Visible = false;
             else gvTrainComponentsMembers.Visible = false;
             if (!IsPostBack) GvTrainComponents();
         }
@@ -56,8 +45,6 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             {
                 gv.DataSource = dt;
                 gv.DataBind();
-
-                lbtest.Text = gv.Rows[1].Cells[18].Text;
             }
             else
             {
@@ -132,6 +119,21 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
         protected void GvTrainComponentsMembers_RowDataBound(object sender, GridViewRowEventArgs e)
         {
 
+        }
+
+        protected void CreateComponent_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/CreateTrainComponent.aspx");
+        }
+
+        protected void BtnAddManufacturer_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/AddManufacturer.aspx");
+        }
+
+        protected void BtnAddRailWayCompany_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/AddRailwayCompany.aspx");
         }
     }
 }

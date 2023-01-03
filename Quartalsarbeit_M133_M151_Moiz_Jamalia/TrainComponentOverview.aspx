@@ -1,14 +1,15 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="TrainComponentOverview.aspx.cs" Inherits="Quartalsarbeit_M133_M151_Moiz_Jamalia.TrainComponentOverview" %>
+﻿<%@ Page Title="MEVS - Train Component Overview" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="TrainComponentOverview.aspx.cs" 
+    Inherits="Quartalsarbeit_M133_M151_Moiz_Jamalia.TrainComponentOverview" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="PlaceHolderHeader" runat="server">
 
     <link rel="stylesheet" runat="server" media="screen" href="/styles.css" /> 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 
-    <div class="navbar_overview">
+    <span class="navbar_overview">
         <asp:HyperLink Text="Train Components" NavigateUrl="~/TrainComponentOverview.aspx" runat="server" CssClass="active navbar_text"/>
         <asp:HyperLink Text="Reservations" NavigateUrl="~/ReservationOverview.aspx" runat="server" CssClass="navbar_text"/>
         <asp:HyperLink Text="Member Administration" NavigateUrl="~/MembersOverview.aspx" runat="server" CssClass="navbar_text"/>
-    </div>
+    </span>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceHolderMain" runat="server">
@@ -45,10 +46,7 @@
 
                 <asp:CommandField ShowEditButton="true" />
                 <asp:CommandField ShowDeleteButton="true" />
-
             </Columns>
-
-            <RowStyle Width="150px"/>
 
         </asp:GridView>
 
@@ -75,19 +73,21 @@
                 <asp:BoundField DataField="SetNr" HeaderText="Set No." ReadOnly="true" />
                 <asp:BoundField DataField="Farbe" HeaderText="Color" ReadOnly="true" />
                 <asp:BoundField DataField="Bemerkung" HeaderText="Comment" ReadOnly="true" />
-                <asp:BoundField DataField="FreigabeFuerZugbildung" HeaderText="Release for train formation" />
+                <asp:CheckBoxField DataField="FreigabeFuerZugbildung" HeaderText="Release for train formation" />
 
                 <asp:CommandField ShowEditButton="true" />
-
             </Columns>
 
         </asp:GridView>
 
-        <asp:Label ID="lbtest" Text="tEST" runat="server" />
-
         </div>
-        <div>
-            <asp:Button ID="createComponent" Text="Create Train Component" runat="server" style="font-weight: bold; bottom: 0; left: 0; position: fixed; margin: 2vh; font-size: 2.5vh;" CssClass="button is-link is-rounded button_background_color"/>
+        <div style="position: fixed">
+            <asp:Button ID="btnCreateComponent" Text="Create Train Component" runat="server" OnClick="CreateComponent_Click" 
+                style="font-weight: bold; bottom: 0; left: 0; position: fixed; margin: 2vh; font-size: 2.5vh;" CssClass="button is-link is-rounded button_background_color" />
+            <asp:Button ID="btnAddManufacturer" Text="Add Manufacturer" runat="server" OnClick="BtnAddManufacturer_Click"
+                style="font-weight: bold; bottom: 0; left: 20vw; position: fixed; margin: 2vh; font-size: 2.5vh;" CssClass="button is-link is-rounded button_background_color" />
+            <asp:Button ID="btnAddRailWayCompany" Text="Add Railway Company" runat="server" OnClick="BtnAddRailWayCompany_Click"
+                style="font-weight: bold; bottom: 0; left: 37vw; position: fixed; margin: 2vh; font-size: 2.5vh;" CssClass="button is-link is-rounded button_background_color" />
         </div>
 
 </asp:Content>

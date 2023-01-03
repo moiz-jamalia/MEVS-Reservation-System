@@ -1,14 +1,14 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CreateReservation.aspx.cs" Inherits="Quartalsarbeit_M133_M151_Moiz_Jamalia.CreateReservation" %>
+﻿<%@ Page Title="MEVS - Reserve Train Component" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CreateReservation.aspx.cs" Inherits="Quartalsarbeit_M133_M151_Moiz_Jamalia.CreateReservation" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="PlaceHolderHeader" runat="server">
 
     <link rel="stylesheet" runat="server" media="screen" href="/styles.css" /> 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 
-    <div class="navbar_overview">
+    <span class="navbar_overview">
         <asp:HyperLink Text="Train Components" NavigateUrl="~/TrainComponentOverview.aspx" runat="server" CssClass="navbar_text" />
         <asp:HyperLink Text="Reservations" NavigateUrl="~/ReservationOverview.aspx" runat="server" CssClass="active navbar_text"/>
         <asp:HyperLink Text="Member Administration" NavigateUrl="~/MembersOverview.aspx" runat="server" CssClass="navbar_text"/>
-    </div>
+    </span>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceHolderMain" runat="server">
@@ -23,7 +23,7 @@
         <br />
 
         <asp:Label Text="Rolling Stock:" runat="server" style="margin-right: 2vh; margin-top: 10vh; font-size: 2.5vh;" />
-        <asp:DropDownList ID="ddl_RollingStock" runat="server" CssClass="input tbDateStyle"/>
+        <asp:DropDownList ID="ddl_RollingStock" runat="server" CssClass="input tbDateStyle" />
         <asp:RequiredFieldValidator ID="reqField12" ErrorMessage="!" ControlToValidate="ddl_RollingStock" runat="server" CssClass="validator" Display="Dynamic" />
         <br />
 

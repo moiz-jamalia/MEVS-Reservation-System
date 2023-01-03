@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SignUp.aspx.cs" Inherits="Quartalsarbeit_M133_M151_Moiz_Jamalia.SignUp" %>
+﻿<%@ Page Title="Sign Up" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SignUp.aspx.cs" Inherits="Quartalsarbeit_M133_M151_Moiz_Jamalia.SignUp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PlaceHolderHeader" runat="server">
     <link media="screen" href="styles.css" rel="stylesheet" />
@@ -9,35 +9,48 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceHolderMain" runat="server">
 
     <div class="registration">
-        <asp:Label Text="First Name" runat="server" /> <br />
+        <asp:Label Text="First Name" runat="server" />
+        <br />
 
-        <asp:TextBox ID="tbFirstName" runat="server" CssClass="input input-box" placeholder="enter first name..." />
-        <asp:RequiredFieldValidator ID="reqFieldVal1" ErrorMessage="!" ControlToValidate="tbFirstName" runat="server" CssClass="validator" Display="Dynamic" /> <br />
+        <asp:TextBox ID="tbFirstName" runat="server" CssClass="input input-box" placeholder="enter First Name..." />
+        <asp:RequiredFieldValidator ID="reqFieldVal1" ErrorMessage="!" ControlToValidate="tbFirstName" runat="server" CssClass="validator" Display="Dynamic" /> 
+        <br />
 
-        <asp:Label Text="Last Name" runat="server" /> <br />
+        <asp:Label Text="Last Name" runat="server" /> 
+        <br />
 
-        <asp:TextBox ID="tbLastName" runat="server" CssClass="input input-box" placeholder="enter last name..." />
-        <asp:RequiredFieldValidator ID="reqFieldVal2" ErrorMessage="!" ControlToValidate="tbLastName" runat="server" CssClass="validator" Display="Dynamic" /> <br />
+        <asp:TextBox ID="tbLastName" runat="server" CssClass="input input-box" placeholder="enter Last Name..." />
+        <asp:RequiredFieldValidator ID="reqFieldVal2" ErrorMessage="!" ControlToValidate="tbLastName" runat="server" CssClass="validator" Display="Dynamic" /> 
+        <br />
 
-        <asp:Label Text="Password" runat="server" /> <br />
+        <asp:Label Text="Password" runat="server" /> 
+        <br />
 
-        <asp:TextBox ID="tbPassword" TextMode="Password" runat="server" CssClass="input input-box" placeholder="enter password..." />
-        <asp:RegularExpressionValidator ID="regFieldVal1" ErrorMessage="Your password needs at least 8 characters." ControlToValidate="tbPassword" runat="server" ValidationExpression="^[\s\S]{8,}$" CssClass="validator" Display="Dynamic" />
-        <asp:RequiredFieldValidator ID="reqFieldVal3" ErrorMessage="!" ControlToValidate="tbPassword" runat="server" CssClass="validator" Display="Dynamic" /> <br />
+        <asp:TextBox ID="tbPassword" TextMode="Password" runat="server" CssClass="input input-box" placeholder="enter Password..." />
+        <asp:RegularExpressionValidator ID="regFieldVal1" ErrorMessage="Your password needs at least 8 characters." ControlToValidate="tbPassword" runat="server" ValidationExpression="^[\s\S]{8,}$" 
+            CssClass="validator" Display="Dynamic" />
+        <asp:RequiredFieldValidator ID="reqFieldVal3" ErrorMessage="!" ControlToValidate="tbPassword" runat="server" CssClass="validator" Display="Dynamic" /> 
+        <br />
 
-        <asp:Label Text="Confirm Password" runat="server" /> <br />
+        <asp:Label Text="Confirm Password" runat="server" /> 
+        <br />
 
-        <asp:TextBox ID="tbConfirmPassword" TextMode="Password" runat="server" CssClass="input input-box" placeholder="enter password again..." />
+        <asp:TextBox ID="tbConfirmPassword" TextMode="Password" runat="server" CssClass="input input-box" placeholder="enter Password again..." />
         <asp:RequiredFieldValidator ID="reqFieldVal4" ErrorMessage="!" ControlToValidate="tbConfirmPassword" runat="server" CssClass="validator" Display="Dynamic" />
-        <asp:CompareValidator ID="compVal1" ErrorMessage="!" ControlToCompare="tbPassword" ControlToValidate="tbConfirmPassword" runat="server" CssClass="validator" Display="Dynamic" /> <br />
+        <asp:CompareValidator ID="compVal1" ErrorMessage="!" ControlToCompare="tbPassword" ControlToValidate="tbConfirmPassword" runat="server" CssClass="validator" Display="Dynamic" /> 
+        <br />
 
         <div class="contact">
-            <asp:Label Text="E-Mail" runat="server" /> <br />
+            <asp:Label Text="E-Mail" runat="server" /> 
+            <br />
 
             <asp:TextBox ID="tbEmail" runat="server" CssClass="input input-box" placeholder="enter E-Mail..." />
             <asp:RequiredFieldValidator ID="reqFieldVal5" ErrorMessage="!" ControlToValidate="tbEmail" runat="server" CssClass="validator" Display="Dynamic" />
-            <asp:CustomValidator ID="duplicateEmailVal" ErrorMessage="There is already an account with this E-Mail address." ControlToValidate="tbEmail" runat="server" CssClass="validator" Display="Dynamic" />
-            <asp:RegularExpressionValidator ID="regFieldVal2" ErrorMessage="Please enter a valid email address" ControlToValidate="tbEmail" runat="server" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="validator" Display="Dynamic" /> <br />
+            <asp:CustomValidator ID="duplicateEmailVal" ErrorMessage="There is already an account with this E-Mail address." ControlToValidate="tbEmail" runat="server" CssClass="validator"
+                Display="Dynamic" />
+            <asp:RegularExpressionValidator ID="regFieldVal2" ErrorMessage="Please enter a valid email address" ControlToValidate="tbEmail" runat="server"
+                ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="validator" Display="Dynamic" /> 
+            <br />
 
             <asp:Label Text="Mobile Number" runat="server" /> <br />
 
