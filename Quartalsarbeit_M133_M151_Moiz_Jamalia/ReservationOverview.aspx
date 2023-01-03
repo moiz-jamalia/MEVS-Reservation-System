@@ -50,7 +50,8 @@
 
         <asp:Label ID="lbAllReservations" Text="All Reservations" runat="server" CssClass="labelStyle"/>
 
-        <asp:GridView ID="gvAllReservations" runat="server" CssClass="table--centered table table is-striped" HeaderStyle-CssClass="thead" RowStyle-CssClass="tr" AutoGenerateColumns="false">
+        <asp:GridView ID="gvAllReservations" runat="server" CssClass="table--centered table table is-striped" HeaderStyle-CssClass="thead" 
+            RowStyle-CssClass="tr" AutoGenerateColumns="false">
 
             <Columns>
 

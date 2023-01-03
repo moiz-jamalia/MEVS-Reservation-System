@@ -43,7 +43,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             Response.Redirect("~/Login.aspx");
         }
 
-        protected void GvBindMembers()
+        private void GvBindMembers()
         {
             DataTable dt = new DataTable();
 
@@ -76,7 +76,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             CheckIfTableEmpty(GvMembers, dt, "No members registered.");
         }
 
-        protected void GvBindSignUps()
+        private void GvBindSignUps()
         {
             DataTable dt = new DataTable();
 

@@ -591,3 +591,40 @@ CREATE PROC sp_UpdateReleaseStatus
 AS 
 UPDATE tbl_Rollmaterial SET FreigabeFuerZugbildung = @release WHERE ID = @trainComponentID;
 GO
+
+/* ***************************************************************************** */
+/* Select Manufacturer */
+
+DROP PROC IF EXISTS sp_SelectManufactuerer;
+GO
+CREATE PROC sp_SelectManufacturer
+AS
+SELECT H.ID, H.Bezeichnung FROM tbl_Hersteller AS H;
+GO
+
+/* ***************************************************************************** */
+/* Insert Manufacturer */
+
+DROP PROC IF EXISTS sp_InsertManufacturer;
+GO
+CREATE PROC sp_InsertManufacturer
+(
+	@designation NVARCHAR(255)
+)
+AS
+IF NOT EXISTS (SELECT H.Bezeichnung FROM tbl_Hersteller AS H WHERE H.Bezeichnung = @designation)
+INSERT INTO tbl_Hersteller (Bezeichnung) VALUES (@designation);
+GO
+
+/* ***************************************************************************** */
+/* Delete Manufacturer */
+
+DROP PROC IF EXISTS sp_DeleteManufacturer;
+GO
+CREATE PROC sp_DeleteManufacturer
+(
+	@designation NVARCHAR(255)
+)
+AS
+DELETE FROM tbl_Hersteller WHERE Bezeichnung = @designation;
+GO

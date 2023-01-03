@@ -13,5 +13,12 @@
     </span>
 
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="PlaceHolderMain" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="PlaceHolderMain" runat="server"> 
+
+    <asp:Label Text="Railway Companies" runat="server" />
+
+    <asp:GridView ID="gvRailwayCompanies" runat="server" AutoGenerateColumns="false" >
+
+    </asp:GridView>
+
 </asp:Content>
