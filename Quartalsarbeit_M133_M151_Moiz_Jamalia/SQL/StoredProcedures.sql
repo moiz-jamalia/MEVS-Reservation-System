@@ -359,12 +359,16 @@ GO
 CREATE PROC sp_SelectAllTrainComponents
 AS
 SELECT 
-R.ID,
-M.Name AS "FirstName",
-M.Vorname AS "LastName",
+R.ID AS "TrainComponent_ID",
+M.ID AS "Member_ID",
+CAST(M.Name AS NVARCHAR(255)) + ' ' + CAST(M.Vorname AS NVARCHAR(255)) AS "Member",
+H.ID AS "Manufacturer_ID",
 H.Bezeichnung AS "Manufacturer",
+V.ID AS "Seller_ID",
 CAST(V.Nachname AS NVARCHAR(255)) + ' ' + CAST(V.Vorname AS NVARCHAR(255)) AS "Seller",
+B.ID AS "RailwayCompany_ID",
 B.Abkürzung AS "RailwayCompany",
+T.ID AS "Model_ID",
 T.Bezeichnung AS "Model",
 R.Typenbezeichnung,
 R.Nr,
@@ -402,6 +406,61 @@ ORDER BY R.ID;
 GO
 
 /* ***************************************************************************** */
+/* Selection for DropDownList Member */
+
+DROP PROC IF EXISTS sp_ddlSelectMember;
+GO
+CREATE PROC sp_ddlSelectMember
+AS
+SELECT M.ID, CAST(M.Name AS NVARCHAR(255)) + ' ' + CAST(M.Vorname AS NVARCHAR(255)) AS "Member" FROM tbl_Mitglied AS M
+ORDER BY M.ID;
+GO
+
+/* ***************************************************************************** */
+/* Selection for DropDownList Manufacturer */
+
+DROP PROC IF EXISTS sp_ddlSelectManufacturer;
+GO
+CREATE PROC sp_ddlSelectManufacturer
+AS
+SELECT H.ID, H.Bezeichnung FROM tbl_Hersteller AS H
+ORDER BY H.ID;
+GO
+
+/* ***************************************************************************** */
+/* Selection for DropDownList Seller */
+
+DROP PROC IF EXISTS sp_ddlSelectSeller;
+GO
+CREATE PROC sp_ddlSelectSeller
+AS
+SELECT V.ID, CAST(V.Nachname AS NVARCHAR(255)) + ' ' + CAST(V.Vorname AS NVARCHAR(255)) AS "Seller" FROM tbl_Verkäufer AS V
+ORDER BY V.ID;
+GO
+
+/* ***************************************************************************** */
+/* Selection for DropDownList Railway Company */
+
+DROP PROC IF EXISTS sp_ddlSelectRailwayCompany;
+GO
+CREATE PROC sp_ddlSelectRailwayCompany
+AS
+SELECT B.ID, B.Abkürzung AS "Abbrevation" FROM tbl_Bahngesellschaft AS B
+ORDER BY B.ID;
+GO
+
+/* ***************************************************************************** */
+/* Selection for DropDownList Model */
+
+DROP PROC IF EXISTS sp_ddlSelectModel;
+GO
+CREATE PROC sp_ddlSelectModel
+AS
+SELECT T.ID, T.Bezeichnung AS "Model" FROM tbl_Typ AS T
+ORDER BY T.ID;
+GO
+
+/* ***************************************************************************** */
 /* Insert Train Component */
 
 DROP PROC IF EXISTS sp_InsertTrainComponent;
@@ -431,38 +490,99 @@ INSERT INTO tbl_Rollmaterial (Fk_Mitglied, FK_Hersteller, FK_Verkaeufer, FK_Bahn
 Typenbezeichnung, Nr, Beschreibung, Kaufpreis, ImBesitz, Occasion, Veröffentlichung, ArtNr, SetNr, Farbe, Bemerkung, FreigabeFuerZugbildung)
 VALUES 
 (
-@FKMitglied,
-@FKHersteller,
-@FKVerkaeufer,
-@FKBahngesellschaft,
-@FKTyp,
-@typenbezeichnung,
-@rollNr,
-@beschreibung,
-@kaufpreis,
-@imBesitz,
-@occasion,
-@veröffentlichung,
-@artNr,
-@setNr,
-@farbe,
-@bemerkung,
-@freigabe
+	@FKMitglied,
+	@FKHersteller,
+	@FKVerkaeufer,
+	@FKBahngesellschaft,
+	@FKTyp,
+	@typenbezeichnung,
+	@rollNr,
+	@beschreibung,
+	@kaufpreis,
+	@imBesitz,
+	@occasion,
+	@veröffentlichung,
+	@artNr,
+	@setNr,
+	@farbe,
+	@bemerkung,
+	@freigabe
 );
 GO
 
 /* ***************************************************************************** */
-/* Check if Reservation overlaps */
+/* Update Train Component */
 
-DROP PROC IF EXISTS sp_SelectOverlapsReservation;
+DROP PROC IF EXISTS sp_UpdateTrainComponent;
 GO
-CREATE PROC sp_SelectOverlapsReservation
+CREATE PROC sp_UpdateTrainComponent
 (
-	@trainDesignationID INT,
-	@fromDate DATETIME2,
-	@toDate DATETIME2
+	@trainComponentID INT,
+	@memberID INT,
+	@manufacturerID INT,
+	@sellerID INT,
+	@railwayCompanyID INT,
+	@modelID INT,
+	@typeDesignation NVARCHAR(255),
+	@no NVARCHAR(255),
+	@description NVARCHAR(255),
+	@purchasePrice MONEY,
+	@inPossession NVARCHAR(255),
+	@occasion BIT,
+	@publication NVARCHAR(255),
+	@articleNo NVARCHAR(255),
+	@setNo NVARCHAR(255),
+	@color NVARCHAR(255),
+	@comment NVARCHAR(255),
+	@release BIT
 )
 AS
-SET DATEFORMAT dmy;
-SELECT COUNT(ID) FROM tbl_Zug WHERE (ID = @trainDesignationID) AND (ReservationVon < @toDate) AND (ReservationBis > @fromDate);
+UPDATE tbl_Rollmaterial SET
+Fk_Mitglied = @memberID,
+FK_Hersteller = @manufacturerID,
+FK_Verkaeufer = @sellerID,
+FK_Bahngesellschaft = @railwayCompanyID,
+FK_Typ = @modelID,
+Typenbezeichnung = @typeDesignation,
+Nr = @no,
+Beschreibung = @description,
+Kaufpreis = @purchasePrice,
+ImBesitz = @inPossession,
+Occasion = @occasion,
+Veröffentlichung = @publication,
+ArtNr = @articleNo,
+SetNr = @setNo,
+Farbe = @color,
+Bemerkung = @comment,
+FreigabeFuerZugbildung = @release
+WHERE ID = @trainComponentID;
+GO
+
+/* ***************************************************************************** */
+/* Delete Train component */
+
+DROP PROC IF EXISTS sp_DeleteTrainComponent;
+GO
+CREATE PROC sp_DeleteTrainComponent
+(
+	@trainComponentID INT
+)
+AS 
+DELETE FROM tbl_Rollmaterial WHERE ID = @trainComponentID;
+
+UPDATE tbl_Zug_Rollmaterial SET FK_Rollmaterial = NULL WHERE FK_Rollmaterial = @trainComponentID;
+GO
+
+/* ***************************************************************************** */
+/* Update Release for train formation */
+
+DROP PROC IF EXISTS sp_UpdateReleaseStatus;
+GO
+CREATE PROC sp_UpdateReleaseStatus
+(
+	@trainComponentID INT,
+	@release BIT
+)
+AS 
+UPDATE tbl_Rollmaterial SET FreigabeFuerZugbildung = @release WHERE ID = @trainComponentID;
 GO

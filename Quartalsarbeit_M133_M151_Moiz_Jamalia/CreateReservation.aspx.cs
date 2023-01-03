@@ -78,32 +78,6 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                 }
             }
         }
-
-        private bool IsBlocked()
-        {
-            return true;
-        }
-
-        private int OverlapsReservation(int TrainDesignationID, DateTime FromDate, DateTime ToDate)
-        {
-            SqlCommand cmd = new SqlCommand("sp_SelectOverlapsReservation", con)
-            {
-                CommandType = CommandType.StoredProcedure
-            };
-
-            cmd.Parameters.Add(new SqlParameter("@trainDesignationID", SqlDbType.Int));
-            cmd.Parameters.Add(new SqlParameter("@fromDate", SqlDbType.DateTime2));
-            cmd.Parameters.Add(new SqlParameter("@toDate", SqlDbType.DateTime2));
-
-            cmd.Parameters["@trainDesignationID"].Value = TrainDesignationID;
-            cmd.Parameters["@fromDate"].Value = FromDate;
-            cmd.Parameters["@toDate"].Value = ToDate;
-
-            con.Open();
-            int overlaps = (int)cmd.ExecuteScalar();
-            con.Close();
-            return overlaps;
-        }
         
         private void InsertReservation(string EMail, DateTime FromDate, DateTime ToDate, string Comment, int TrainComponentID, string TrainDesignation)
         {
@@ -124,7 +98,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             cmd.Parameters["@toDate"].Value = ToDate;
             cmd.Parameters["@comment"].Value = Comment;
             cmd.Parameters["@trainComponentID"].Value = TrainComponentID;
-            cmd.Parameters["@trainDesignation"].Value = TrainDesignation;
+            cmd.Parameters["@trainDesignation"].Value = String.Concat(TrainDesignation.Where(c => !Char.IsWhiteSpace(c)));
 
             con.Open();
             cmd.ExecuteNonQuery();

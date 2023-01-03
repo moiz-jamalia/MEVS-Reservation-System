@@ -24,13 +24,53 @@
             OnRowDataBound="GvTrainComponentsAdmins_RowDataBound" >
 
             <Columns>
-                <asp:BoundField DataField="ID" HeaderText="ID" />
-                <asp:BoundField DataField="FirstName" HeaderText="First Name" />
-                <asp:BoundField DataField="LastName" HeaderText="Last Name" />
-                <asp:BoundField DataField="Manufacturer" HeaderText="Manufacturer" />
-                <asp:BoundField DataField="Seller" HeaderText="Seller" />
-                <asp:BoundField DataField="RailwayCompany" HeaderText="Railway Company" />
-                <asp:BoundField DataField="Model" HeaderText="Model" />
+                <asp:BoundField DataField="TrainComponent_ID" HeaderText="ID" ReadOnly="true"/>
+                
+                <asp:TemplateField HeaderText="Member">
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="ddl_Member" runat="server" />
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lbMember" Text='<%# Eval("Member") %>' runat="server" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Manufacturer">
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="ddl_Manufacturer" runat="server" />
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lbManufacturer" Text='<%# Eval("Manufacturer") %>' runat="server" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Seller">
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="ddl_Seller" runat="server" />
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lbSeller" Text='<%# Eval("Seller") %>' runat="server" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Railway Company">
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="ddl_RailwayCompany" runat="server" />
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lbManufacturer" Text='<%# Eval("RailwayCompany") %>' runat="server" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Model">
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="ddl_Model" runat="server" />
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="lbManufacturer" Text='<%# Eval("Model") %>' runat="server" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+
                 <asp:BoundField DataField="Typenbezeichnung" HeaderText="Type designation" />
                 <asp:BoundField DataField="Nr" HeaderText="No." />
                 <asp:BoundField DataField="Beschreibung" HeaderText="Description" />
@@ -52,12 +92,11 @@
 
         <asp:GridView ID="gvTrainComponentsMembers" runat="server" CssClass="table--centered table table is-striped" HeaderStyle-CssClass="thead" RowStyle-CssClass="tr"
             AutoGenerateColumns="false" OnPageIndexChanging="GvTrainComponentsMembers_PageIndexChanging" OnRowCancelingEdit="GvTrainComponentsMembers_RowCancelingEdit"
-            OnRowEditing="GvTrainComponentsMembers_RowEditing" OnRowUpdating="GvTrainComponentsMembers_RowUpdating" OnRowDataBound="GvTrainComponentsMembers_RowDataBound">
+            OnRowEditing="GvTrainComponentsMembers_RowEditing" OnRowUpdating="GvTrainComponentsMembers_RowUpdating" >
 
             <Columns>
-                <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="true"/>
-                <asp:BoundField DataField="FirstName" HeaderText="First Name" ReadOnly="true" />
-                <asp:BoundField DataField="LastName" HeaderText="Last Name" ReadOnly="true" />
+                <asp:BoundField DataField="TrainComponent_ID" HeaderText="ID" ReadOnly="true"/>
+                <asp:BoundField DataField="Member" HeaderText="Member" ReadOnly="true" />
                 <asp:BoundField DataField="Manufacturer" HeaderText="Manufacturer" ReadOnly="true" />
                 <asp:BoundField DataField="Seller" HeaderText="Seller" ReadOnly="true" />
                 <asp:BoundField DataField="RailwayCompany" HeaderText="Railway Company" ReadOnly="true" />

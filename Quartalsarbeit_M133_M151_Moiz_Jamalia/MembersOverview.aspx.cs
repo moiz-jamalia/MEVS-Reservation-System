@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Web.UI.WebControls;
 
 namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
@@ -214,9 +215,9 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
             else cmd.Parameters["@Status"].Value = (Row.FindControl("ddl_Status") as DropDownList).SelectedValue;
             if (isAdmin && Row.Cells[3].Text == Session["email"].ToString()) cmd.Parameters["@IsAdmin"].Value = true;
             else cmd.Parameters["@IsAdmin"].Value = (Row.Cells[0].Controls[0] as CheckBox).Checked;
-            cmd.Parameters["@LastName"].Value = (Row.Cells[1].Controls[0] as TextBox).Text;
-            cmd.Parameters["@FirstName"].Value = (Row.Cells[2].Controls[0] as TextBox).Text;
-            cmd.Parameters["@CurrentEmail"].Value = Row.Cells[3].Text;
+            cmd.Parameters["@LastName"].Value = String.Concat(((Row.Cells[1].Controls[0] as TextBox).Text).Where(c => !Char.IsWhiteSpace(c)));
+            cmd.Parameters["@FirstName"].Value = String.Concat(((Row.Cells[2].Controls[0] as TextBox).Text).Where(c => !Char.IsWhiteSpace(c)));
+            cmd.Parameters["@CurrentEmail"].Value = String.Concat((Row.Cells[3].Text).Where(c => !Char.IsWhiteSpace(c)));
             cmd.Parameters["@Handy"].Value = (Row.Cells[4].Controls[0] as TextBox).Text;
             cmd.Parameters["@Comment"].Value = (Row.Cells[5].Controls[0] as TextBox).Text;
 

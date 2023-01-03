@@ -80,7 +80,6 @@
   <ItemGroup>
     <Content Include="AddManufacturer.aspx" />
     <Content Include="AddRailwayCompany.aspx" />
-    <Content Include="AddSeller.aspx" />
     <Content Include="CreateReservation.aspx" />
     <Content Include="CreateTrainComponent.aspx" />
     <Content Include="Login.aspx" />
@@ -105,13 +104,6 @@
     </Compile>
     <Compile Include="AddRailwayCompany.aspx.designer.cs">
       <DependentUpon>AddRailwayCompany.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AddSeller.aspx.cs">
-      <DependentUpon>AddSeller.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AddSeller.aspx.designer.cs">
-      <DependentUpon>AddSeller.aspx</DependentUpon>
     </Compile>
     <Compile Include="CreateReservation.aspx.cs">
       <DependentUpon>CreateReservation.aspx</DependentUpon>
