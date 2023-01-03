@@ -25,7 +25,8 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                     switch(GetMemberStatus(tbEmail.Text))
                     {
                         case "1 - Anfrage":
-                            lbInvalidLogin.Text = "Your registration request has been saved and is still being processed. This may take some time. We thank you for your patience.";
+                            lbInvalidLogin.Text = "Your registration request has been saved and is still being processed. This may take some time. " +
+                                "We thank you for your patience.";
                             break;
 
                         case "2 - Registriert":

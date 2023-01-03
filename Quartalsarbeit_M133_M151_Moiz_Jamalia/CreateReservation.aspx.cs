@@ -63,7 +63,7 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                     DateTime toDate = Convert.ToDateTime(tbToDate.Text + " " + tbToTime.Text);
 
                     if (fromDate >= toDate) lbResError.Text = "Please enter a valid time span";
-                    else if (toDate < DateTime.Now) lbResError.Text = "The end date must not be in the past.";
+                    else if (toDate < DateTime.Now && fromDate < DateTime.Now) lbResError.Text = "The end date must not be in the past.";
                     else
                     {
                         int TrainComponentID = int.Parse(ddl_RollingStock.SelectedValue);

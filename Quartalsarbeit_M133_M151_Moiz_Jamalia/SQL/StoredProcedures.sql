@@ -466,10 +466,14 @@ GO
 DROP PROC IF EXISTS sp_InsertTrainComponent;
 GO
 CREATE PROC sp_InsertTrainComponent
-(
-	@FKMitglied INT, 
+( 
 	@FKHersteller INT, 
-	@FKVerkaeufer INT,
+	@VerkaeuferVorname NVARCHAR(255),
+	@VerkaeuferNachname NVARCHAR(255),
+	@VerkaeuferAddresse NVARCHAR(255),
+	@VerkaeuferEMail NVARCHAR(255),
+	@VerkaeuferHandy NVARCHAR(255),
+	@VerkaeuferBemerkung NVARCHAR(255),
 	@FKBahngesellschaft INT,
 	@FKTyp INT,
 	@typenbezeichnung NVARCHAR(255),
@@ -486,13 +490,14 @@ CREATE PROC sp_InsertTrainComponent
 	@freigabe BIT
 )
 AS
+INSERT INTO tbl_Verkäufer (Nachname, Vorname, Adresse, eMail, Telefon, Bemerkung) VALUES (@VerkaeuferNachname, @VerkaeuferVorname, @VerkaeuferAddresse, @VerkaeuferEMail, @VerkaeuferHandy, @VerkaeuferBemerkung);
 INSERT INTO tbl_Rollmaterial (Fk_Mitglied, FK_Hersteller, FK_Verkaeufer, FK_Bahngesellschaft, FK_Typ,
 Typenbezeichnung, Nr, Beschreibung, Kaufpreis, ImBesitz, Occasion, Veröffentlichung, ArtNr, SetNr, Farbe, Bemerkung, FreigabeFuerZugbildung)
 VALUES 
 (
-	@FKMitglied,
+	NULL,
 	@FKHersteller,
-	@FKVerkaeufer,
+	(SELECT V.ID FROM tbl_Verkäufer AS V WHERE V.Vorname = @VerkaeuferVorname AND V.Nachname = @VerkaeuferNachname),
 	@FKBahngesellschaft,
 	@FKTyp,
 	@typenbezeichnung,

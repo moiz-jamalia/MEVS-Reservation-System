@@ -42,7 +42,8 @@ namespace Quartalsarbeit_M133_M151_Moiz_Jamalia
                 if (insert < 0) duplicateEmailVal.IsValid = false;
                 else 
                 {
-                    lbMessage.Text = "Your Registration Request has been saved. Please wait until your request is accepted by an administrator. This may take some time. We thank you for your patience.";
+                    lbMessage.Text = "Your Registration Request has been saved. Please wait until your request is accepted by an administrator." +
+                        " This may take some time. We thank you for your patience.";
                     tbFirstName.Text = String.Empty;
                     tbLastName.Text = String.Empty;
                     tbEmail.Text = String.Empty;
